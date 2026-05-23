@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║           DIAGONAL ACESSORIA — index.html                        ║
+  ║   Estrutura HTML pura — estilos e scripts em arquivos externos   ║
+  ╠══════════════════════════════════════════════════════════════════╣
+  ║  ESTRUTURA DO PROJETO (organização de pastas):                   ║
+  ║  contabilgold/                                                   ║
+  ║  ├── index.html   ← VOCÊ ESTÁ AQUI (estrutura/conteúdo)          ║
+  ║  ├── style.css    ← Visual (cores, fontes, layout)               ║
+  ║  └── script.js    ← Comportamento (cliques, animações, forms)    ║
+  ╠══════════════════════════════════════════════════════════════════╣
+-->
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <meta name="description" content="Contáb — Contabilidade estratégica para empresas que querem crescer com segurança." />
+  <meta name="keywords" content="contabilidade, empresa, MEI, CNPJ, impostos, Rio de Janeiro" />
+  <meta name="author" content="Diagonal Acessoria" /> 
+  <link rel="stylesheet" href="style.css" /> 
+  <title>Diagonal Acessoria</title>
+</head>
+
+<body>
+
+  <!-- ╔═════════════════════════════════════════════════════════╗
+       ║  NAVBAR — Barra de navegação fixed                      ║
+       ║  JS (script.js): hambúrguer mobile + fechar ao clicar   ║
+       ╚═════════════════════════════════════════════════════════╝ -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Navegação principal">
+      <div class="container">
+        <div class="navbar__inner">
+          <img src="img/logoWhite.png" alt="Diagonal Acessoria" />
+
+          <a href="#" class="navbar__logo" aria-label="Diagonal Acessoria - Página inicial">
+            
+            Diagonal<span>Assessoria</span>
+          </a>
+
+          <!-- href="#secao" → scroll suave até o elemento com id="secao" -->
+          <ul class="navbar__links" id="navLinks" role="list">
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#sobre">Empresa</a></li>
+            <li><a href="#mvv">Missão</a></li>
+            <li><a href="#depoimentos">Clientes</a></li>
+            <li><a href="#localizacao">Localização</a></li>
+            <li><a href="#contato" class="btn-nav">Fale Conosco</a></li>
+          </ul>
+
+          <!-- Botão hambúrguer (mobile) — JS alterna a classe .aberto -->
+          <button
+            class="navbar__toggle"
+            id="navToggle"
+            aria-label="Abrir menu de navegação"
+            aria-expanded="false"
+            aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- <main> = conteúdo principal — deve existir APENAS UM por página -->
+  <main>
+
+    <!-- ╔═════════════════════════════════════════════════════════╗
+         ║  SEÇÃO 1 — HERO (Banner Principal)                     ║
+         ╚═════════════════════════════════════════════════════════╝ -->
+    <section class="hero" id="hero" aria-label="Seção principal">
+      <div class="container">
+        <div class="hero__conteudo">
+
+          <p class="hero__tag" aria-hidden="true">
+            Escritório de Contabilidade — Rio de Janeiro
+          </p>
+
+          <!-- H1: único por página — mais relevante para SEO -->
+          <h1 class="hero__titulo">
+            Contabilidade estratégica para empresas que querem
+            crescer com  <em>segurança</em>
+          </h1>
+
+          <!-- <p class="hero__subtitulo">
+            Mais do que números: somos parceiros do seu negócio. Planejamento fiscal,
+            abertura de empresas, folha de pagamento e muito mais.
+          </p> -->
+
+          <!-- CTAs = Call to Action (botões de conversão) -->
+          <div class="hero__botoes">
+            <a href="#contato" class="btn-primario">Fale Conosco</a>
+            <!-- <a href="#servicos" class="btn-secundario">Ver Serviços</a> -->
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Seta decorativa animada (indica "role para baixo") -->
+      <div class="hero__scroll" aria-hidden="true">
+        <div class="hero__scroll-seta"></div>
+      </div>
+    </section>
+
+
+    <!-- ╔═════════════════════════════════════════════════════════╗
+         ║  SEÇÃO 2 — SERVIÇOS                                     ║
+         ║  CSS: grid auto-fit (responsivo sem media query)        ║
+         ║  JS: classe .animar controlada pelo IntersectionObserver║
+         ╚═════════════════════════════════════════════════════════╝ -->
+    <section class="servicos" id="servicos" aria-labelledby="titulo-servicos">
+      <div class="container">
+
+        <div class="servicos__cabecalho">
+          <p class="tag-ouro">Como a Diagonal pode ajudar sua empresa</p>
+          <h2 class="titulo-secao" id="titulo-servicos">Nossos Serviços</h2>
+          <div class="divisor-ouro" role="presentation"></div>
+          <p class="subtitulo-secao" style="margin-inline: auto; text-align: center;">
+            Oferecemos soluções completas em contabilidade para empresas de todos os portes,
+            com atendimento personalizado e foco em resultados.
+          </p>
+        </div>
+
+        <!-- Grid responsivo — 4 colunas no desktop, 1-2 no mobile -->
+        <div class="servicos__grid">
+
+          <!-- <article> = conteúdo autocontido e reutilizável -->
+          <article class="card-servico animar" aria-label="Serviço de Abertura de Empresa">
+            <div class="card-servico__icone" aria-hidden="true">🏢</div>
+            <h3 class="card-servico__titulo">Departamento<p>pessoal</p></h3>
+            <p class="card-servico__texto">
+              Gerenciamos toda a rotina trabalhista da sua empresa com agilidade, conformidade e atendimento humanizado.
+            </p>
+            <!-- <a href="#contato" class="card-servico__link">Saiba mais &#8594;</a> -->
+          </article>
+
+          <article class="card-servico animar" aria-label="Serviço de Planejamento Tributário">
+            <div class="card-servico__icone" aria-hidden="true">📊</div>
+            <h3 class="card-servico__titulo">Fiscal e Tributário</h3>
+            <p class="card-servico__texto">
+              Cuidamos das obrigações fiscais e buscamos soluções inteligentes para reduzir riscos e otimizar sua carga tributária
+            </p>
+            <!-- <a href="#contato" class="card-servico__link">Saiba mais &#8594;</a> -->
+          </article>
+
+          <article class="card-servico animar" aria-label="Serviço de Folha de Pagamento">
+            <div class="card-servico__icone" aria-hidden="true">👥</div>
+            <h3 class="card-servico__titulo">Abertura de Empresas</h3>
+            <p class="card-servico__texto">
+              Abrimos, regularizamos e estruturamos sua empresa com segurança, agilidade e suporte especializado em todas as etapas do processo.
+            </p>
+            <!-- <a href="#contato" class="card-servico__link">Saiba mais &#8594;</a> --> 
+          </article>
+
+          <article class="card-servico animar" aria-label="Serviço de Contabilidade Digital">
+            <div class="card-servico__icone" aria-hidden="true"></div>
+            <h3 class="card-servico__titulo">Gestão Financeira</h3>
+            <p class="card-servico__texto">
+              Mais controle financeiro, organização e eficiência para ajudar sua empresa a tomar decisões com mais confiança
+            </p>
+            <!-- <a href="#contato" class="card-servico__link">Saiba mais &#8594;</a> -->
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ╔═════════════════════════════════════════════════════════╗
+         ║  SEÇÃO 3 — SOBRE NÓS                                    ║
+         ║  CSS: Flexbox 2 colunas (imagem + texto)                ║
+         ╚═════════════════════════════════════════════════════════╝ -->
+    <section class="sobre" id="sobre" aria-labelledby="titulo-sobre">
+      <div class="container">
+        <div class="sobre__layout">
+
+          <!-- Coluna da imagem -->
+          <div class="sobre__imagem-col animar">
+            <div class="sobre__imagem-wrapper">
+              <!--
+                alt="" = texto alternativo (OBRIGATÓRIO para acessibilidade)
+                loading="lazy" = carregamento tardio (performance)
+              -->
+              <img
+                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80"
+                alt="Contador profissional em escritório moderno, sorrindo com confiança"
+                loading="lazy"
+              />
+            </div>
+            <!-- Badge sobreposta via CSS position: absolute -->
+            <div class="sobre__badge">
+              <strong>15+</strong>
+              <span>Anos de experiência</span>
+            </div>
+          </div>
+
+          <!-- Coluna de texto -->
+          <div class="sobre__texto-col animar">
+            <p class="tag-ouro">Sobre a Diagonal</p>
+            <h2 class="titulo-secao" id="titulo-sobre">Parceiros estratégicos do seu negócio</h2>
+            <div class="divisor-ouro" style="margin-left: 0;"></div>
+
+            <p style="color: var(--cor-cinza-texto); margin-top: 1rem;">
+              Fundada em 2009, a Diagonal é um escritório de contabilidade especializado
+              em pequenas e médias empresas. Nossa missão é simplificar a burocracia para
+              que você foque no que realmente importa:
+              <strong style="color: var(--cor-branco);">crescer o seu negócio</strong>.
+            </p>
+
+            <ul class="sobre__lista" aria-label="Nossos diferenciais">
+              <li class="sobre__item">
+                <div class="sobre__item-icone" aria-hidden="true">🏆</div>
+                <div>
+                  <strong>Equipe especializada</strong>
+                  <p>Contadores, advogados e consultores com certificações CRC ativas.</p>
+                </div>
+              </li>
+              <li class="sobre__item">
+                <div class="sobre__item-icone" aria-hidden="true">⚡</div>
+                <div>
+                  <strong>Atendimento ágil</strong>
+                  <p>Respondemos em até 24h úteis. Suporte via WhatsApp, e-mail e portal.</p>
+                </div>
+              </li>
+              <li class="sobre__item">
+                <div class="sobre__item-icone" aria-hidden="true">🔒</div>
+                <div>
+                  <strong>Segurança e conformidade</strong>
+                  <p>Seguimos rigorosamente as normas do CFC, LGPD e legislação tributária vigente.</p>
+                </div>
+              </li>
+            </ul>
+
+            <a href="#contato" class="btn-primario" style="margin-top: 2rem;">Fale com um Especialista</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ╔═════════════════════════════════════════════════════════╗
+         ║  SEÇÃO 4 — MISSÃO, VISÃO E VALORES                     ║
+         ╚═════════════════════════════════════════════════════════╝ -->
+    <section class="mvv" id="mvv" aria-labelledby="titulo-mvv">
+      <div class="container">
+
+        <div class="mvv__cabecalho">
+          <p class="tag-ouro">Nossa cultura</p>
+          <h2 class="titulo-secao" id="titulo-mvv" style="color: var(--cor-ouro);">
+            Missão, Visão e Valores
+          </h2>
+          <div class="divisor-ouro"></div>
+        </div>
+
+        <div class="mvv__grid">
+
+          <div class="mvv__card animar">
+            <div class="mvv__card-letra" aria-hidden="true">M</div>
+            <h3 class="mvv__card-titulo">Missão</h3>
+            <p>
+              Oferecer serviços contábeis de excelência que simplifiquem a gestão financeira
+              das empresas, gerando segurança e crescimento sustentável para nossos clientes
+              com atendimento humano e tecnologia de ponta.
+            </p>
+          </div>
+
+          <div class="mvv__card animar">
+            <div class="mvv__card-letra" aria-hidden="true">V</div>
+            <h3 class="mvv__card-titulo">Visão</h3>
+            <p>
+              Ser reconhecida como o escritório de contabilidade mais confiável e inovador
+              do Rio de Janeiro, expandindo nossa atuação para todo o Brasil até 2030 através
+              da contabilidade 100% digital.
+            </p>
+          </div>
+
+          <div class="mvv__card animar">
+            <div class="mvv__card-letra" aria-hidden="true">V</div>
+            <h3 class="mvv__card-titulo">Valores</h3>
+            <p>
+              Ética e transparência em todas as relações. Comprometimento com prazos e resultados.
+              Inovação contínua. Respeito ao cliente e à legislação. Responsabilidade social
+              e ambiental.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ╔═════════════════════════════════════════════════════════╗
+         ║  SEÇÃO 5 — DEPOIMENTOS (Carrossel)                      ║
+         ║  JS: translateX no track + dots criados dinamicamente   ║
+         ╚═════════════════════════════════════════════════════════╝ -->
+    <section class="depoimentos" id="depoimentos" aria-labelledby="titulo-depoimentos">
+      <div class="container">
+
+        <div class="depoimentos__cabecalho">
+          <p class="tag-ouro">Veja o que nossos clientes têm a dizer sobre nós!</p>
+          <h2 class="titulo-secao" id="titulo-depoimentos">Depoimentos</h2>
+          <div class="divisor-ouro"></div>
+        </div>
+
+        <!--
+          ESTRUTURA DO CARROSSEL:
+          [wrapper overflow:hidden]
+            [track display:flex] ← o JS move este elemento com translateX
+              [card min-width:50%]
+              [card min-width:50%]
+              [card] ← escondido pelo overflow
+              [card] ← escondido pelo overflow
+        -->
+        <div
+          class="depoimentos__track-wrapper"
+          role="region"
+          aria-roledescription="carrossel"
+          aria-label="Depoimentos de clientes">
+
+          <div class="depoimentos__track" id="carrosselTrack">
+
+            <article class="depoimento-card" role="group" aria-roledescription="slide" aria-label="Depoimento 1 de 4">
+              <div class="depoimento-card__aspas" aria-hidden="true">"</div>
+              <p class="depoimento-card__texto">
+                A Diagonal Assessoria transformou a gestão financeira da minha empresa. Antes eu perdia
+                horas com notas fiscais e impostos. Hoje tudo é digital e transparente. Recomendo demais!
+              </p>
+              <div class="depoimento-card__autor">
+                <div class="depoimento-card__avatar" aria-hidden="true">RS</div>
+                <div>
+                  <div class="depoimento-card__estrelas" aria-label="5 estrelas">★★★★★</div>
+                  <strong>Roberto Silva</strong>
+                  <p style="font-size: 0.8rem; color: var(--preto-principal);">CEO · Silva Comércio</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="depoimento-card" role="group" aria-roledescription="slide" aria-label="Depoimento 2 de 4">
+              <div class="depoimento-card__aspas" aria-hidden="true">"</div>
+              <p class="depoimento-card__texto">
+                Abri minha MEI com a orientação da Diagonal Assessoria e foi tudo muito simples.
+                Eles me explicaram cada passo, sem burocracia e com muito profissionalismo.
+              </p>
+              <div class="depoimento-card__autor">
+                <div class="depoimento-card__avatar" aria-hidden="true">AM</div>
+                <div>
+                  <div class="depoimento-card__estrelas" aria-label="5 estrelas">★★★★★</div>
+                  <strong>Ana Moreira</strong>
+                  <p style="font-size: 0.8rem; color: var(--preto-principal);">MEI · Design Gráfico</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="depoimento-card" role="group" aria-roledescription="slide" aria-label="Depoimento 3 de 4">
+              <div class="depoimento-card__aspas" aria-hidden="true">"</div>
+              <p class="depoimento-card__texto">
+                O planejamento tributário que eles fizeram para nossa empresa gerou uma economia
+                de mais de R$ 40 mil no primeiro ano. Investimento que se paga sozinho!
+              </p>
+              <div class="depoimento-card__autor">
+                <div class="depoimento-card__avatar" aria-hidden="true">CF</div>
+                <div>
+                  <div class="depoimento-card__estrelas" aria-label="5 estrelas">★★★★★</div>
+                  <strong>Carlos Ferreira</strong>
+                  <p style="font-size: 0.8rem; color: var(--preto-principal);">Sócio · Ferreira &amp; Cia</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="depoimento-card" role="group" aria-roledescription="slide" aria-label="Depoimento 4 de 4">
+              <div class="depoimento-card__aspas" aria-hidden="true">"</div>
+              <p class="depoimento-card__texto">
+                Atendimento excepcional! Sempre que tenho dúvidas, a equipe responde rapidamente
+                pelo WhatsApp. Me sinto segura sabendo que a parte contábil está em boas mãos.
+              </p>
+              <div class="depoimento-card__autor">
+                <div class="depoimento-card__avatar" aria-hidden="true">PL</div>
+                <div>
+                  <div class="depoimento-card__estrelas" aria-label="5 estrelas">★★★★★</div>
+                  <strong>Patrícia Lima</strong>
+                  <p style="font-size: 0.8rem; color: var(--preto-principal);">Diretora · Lima Tech</p>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Controles: os dots são criados pelo script.js via createElement -->
+        <div class="depoimentos__controles" role="group" aria-label="Controles do carrossel">
+          <button class="depoimentos__btn" id="btnAnterior" aria-label="Depoimento anterior">&#8592;</button>
+          <div class="depoimentos__dots" id="carrosselDots" role="tablist" aria-label="Selecionar depoimento"></div>
+          <button class="depoimentos__btn" id="btnProximo" aria-label="Próximo depoimento">&#8594;</button>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ╔═════════════════════════════════════════════════════════╗
+         ║  SEÇÃO 6 — LOCALIZAÇÃO                                 ║
+         ║  Inclui <iframe> do Google Maps                        ║
+         ╚═════════════════════════════════════════════════════════╝ -->
+    <section class="localizacao" id="localizacao" aria-labelledby="titulo-localizacao">
+      <div class="container">
+
+        <div class="localizacao__cabecalho">
+          <p class="tag-ouro">Onde nos encontrar</p>
+          <h2 class="titulo-secao" id="titulo-localizacao">Onde Estamos Localizados?</h2>
+          <div class="divisor-ouro"></div>
+        </div>
+
+        <div class="localizacao__layout">
+
+          <div class="localizacao__infos animar">
+
+            <div class="localizacao__item">
+              <span class="localizacao__item-icone" aria-hidden="true">📍</span>
+              <div>
+                <strong>Endereço</strong>
+                <p>Av. Rio Branco, 45 — Sala 802<br>Centro, Rio de Janeiro — RJ<br>CEP: 20040-020</p>
+              </div>
+            </div>
+
+            <div class="localizacao__item">
+              <span class="localizacao__item-icone" aria-hidden="true">📞</span>
+              <div>
+                <strong>Telefone</strong>
+                <!-- href="tel:" → abre o discador no celular -->
+                <p><a href="tel:+5521999998788" style="color: var(--cor-cinza-texto);">(21) 99999-8788</a></p>
+                <!-- href="https://wa.me/" → abre o WhatsApp -->
+                <p><a href="https://wa.me/5521999998888" style="color: var(--cor-ouro);">WhatsApp: (21) 99999-8888</a></p>
+              </div>
+            </div>
+
+            <div class="localizacao__item">
+              <span class="localizacao__item-icone" aria-hidden="true">📧</span>
+              <div>
+                <strong>E-mail</strong>
+                <!-- href="mailto:" → abre o cliente de e-mail -->
+                <p><a href="mailto:contato@diagonal.com.br" style="color: var(--cor-cinza-texto);">contato@diagonal.com.br</a></p>
+              </div>
+            </div>
+
+            <div class="localizacao__item">
+              <span class="localizacao__item-icone" aria-hidden="true">🕐</span>
+              <div>
+                <strong>Horário de Atendimento</strong>
+                <p>Segunda a Sexta: 09h às 18h<br>Sábado: 09h às 13h</p>
+              </div>
+            </div>
+
+            <a href="#contato" class="btn-primario" style="margin-top: 0.5rem;">Agendar Visita</a>
+          </div>
+
+          <!-- <iframe> = Inline Frame → incorpora uma página/serviço externo -->
+          <div class="localizacao__mapa animar">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.356647773456!2d-43.17660492501953!3d-22.90278977929559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997f5fd1cbaeaf%3A0x7ef3a05d4b1f8f3a!2sAv.%20Rio%20Branco%2C%2045%20-%20Centro%2C%20Rio%20de%20Janeiro%20-%20RJ!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
+              title="Localização da Diagonal Assessoria — Av. Rio Branco, 45, Centro, Rio de Janeiro"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ╔═════════════════════════════════════════════════════════╗
+         ║  SEÇÃO 7 — FORMULÁRIO DE CONTATO                       ║
+         ║  JS: validação de campos + feedback + envio simulado   ║
+         ╚═════════════════════════════════════════════════════════╝ -->
+    <section class="contato" id="contato" aria-labelledby="titulo-contato">
+      <div class="container">
+        <div class="contato__layout">
+
+          <!-- Texto motivacional -->
+          <div class="contato__texto animar">
+            <p class="tag-ouro">Entre em contato</p>
+            <h2 class="titulo-secao" id="titulo-contato">Falta Pouco! Fale Conosco Agora</h2>
+            <div class="divisor-ouro" style="margin-left: 0;"></div>
+
+            <p style="color: var(--cor-cinza-texto); margin-top: 1rem;">
+              Preencha o formulário ao lado e nossa equipe entrará em contato em até
+              <strong style="color: var(--cor-ouro);">1 dia útil</strong> para uma
+              consultoria gratuita sem compromisso.
+            </p>
+
+            <ul class="contato__lista" aria-label="Benefícios do atendimento">
+              <li class="contato__lista-item">Consultoria inicial gratuita</li>
+              <li class="contato__lista-item">Sem taxa de adesão no primeiro mês</li>
+              <li class="contato__lista-item">Proposta personalizada para o seu negócio</li>
+              <li class="contato__lista-item">Atendimento por contador certificado CRC</li>
+            </ul>
+          </div>
+
+          <!-- Wrapper do formulário -->
+          <div class="contato__form-wrapper animar">
+
+            <!-- Mensagem de sucesso (oculta; exibida pelo JS após envio) -->
+            <div class="form__sucesso" id="formSucesso" role="alert" aria-live="polite">
+              <div class="form__sucesso-icone">✅</div>
+              <h3>Mensagem enviada com sucesso!</h3>
+              <p>Nossa equipe entrará em contato em até 1 dia útil.</p>
+            </div>
+
+            <!--
+              novalidate → desativa validação nativa do HTML5
+              O script.js faz a validação customizada com feedback visual
+            -->
+            <form class="form" id="formContato" novalidate aria-label="Formulário de contato">
+
+              <!-- Grid 2 colunas: Nome + Empresa lado a lado -->
+              <div class="form__linha">
+
+                <div class="form__grupo">
+                  <!-- <label for="id"> → clique no label foca o campo (acessibilidade!) -->
+                  <label class="form__label" for="nome">Nome *</label>
+                  <input
+                    class="form__input"
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Seu nome completo"
+                    required
+                    autocomplete="given-name"
+                    aria-required="true"
+                  />
+                  <!-- Span de erro → exibido/ocultado pelo script.js -->
+                  <span class="form__erro" id="erroNome" role="alert" style="display:none; color:#e57373; font-size:0.8rem;"></span> /* corrigir cor de erro*/
+                </div>
+
+                <div class="form__grupo">
+                  <label class="form__label" for="empresa">Empresa</label>
+                  <input
+                    class="form__input"
+                    type="text"
+                    id="empresa"
+                    name="empresa"
+                    placeholder="Nome da empresa (opcional)"
+                    autocomplete="organization"
+                  />
+                </div>
+
+              </div>
+
+              <!-- type="email" → validação de formato pelo navegador + teclado @ no mobile -->
+              <div class="form__grupo">
+                <label class="form__label" for="email">E-mail *</label>
+                <input
+                  class="form__input"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="seu@email.com"
+                  required
+                  autocomplete="email"
+                  aria-required="true"
+                />
+                <span class="form__erro" id="erroEmail" role="alert" style="display:none; color:#e57373; font-size:0.8rem;"></span>
+              </div>
+
+              <!-- type="tel" → teclado numérico no mobile, máscara aplicada pelo JS -->
+              <div class="form__grupo">
+                <label class="form__label" for="telefone">Telefone</label>
+                <input
+                  class="form__input"
+                  type="tel"
+                  id="telefone"
+                  name="telefone"
+                  placeholder="(21) 99999-9999"
+                  autocomplete="tel"
+                />
+              </div>
+
+              <!-- <select> = lista suspensa de opções -->
+              <div class="form__grupo">
+                <label class="form__label" for="servico">Serviço de Interesse</label>
+                <select class="form__input form__select" id="servico" name="servico">
+                  <option value="">Selecione um serviço...</option>
+                  <option value="abertura">Abertura de Empresa / MEI</option>
+                  <option value="tributario">Planejamento Tributário</option>
+                  <option value="folha">Folha de Pagamento / RH</option>
+                  <option value="contabilidade">Contabilidade Mensal</option>
+                  <option value="digital">Contabilidade Digital</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+
+              <!-- <textarea> = campo de texto multilinha -->
+              <div class="form__grupo">
+                <label class="form__label" for="mensagem">Mensagem *</label>
+                <textarea
+                  class="form__input form__textarea"
+                  id="mensagem"
+                  name="mensagem"
+                  placeholder="Descreva brevemente sua necessidade..."
+                  required
+                  aria-required="true"
+                  rows="4">
+                </textarea>
+                <span class="form__erro" id="erroMensagem" role="alert" style="display:none; color:#e57373; font-size:0.8rem;"></span>
+              </div>
+
+              <!-- Checkbox LGPD: consentimento obrigatório pela Lei 13.709/2018 -->
+              <div class="form__grupo" style="flex-direction: row; align-items: flex-start; gap: 10px;">
+                <input
+                  type="checkbox"
+                  id="lgpd"
+                  name="lgpd"
+                  required
+                  aria-required="true"
+                  style="margin-top: 3px; accent-color: var(--cor-ouro); width: auto;"
+                />
+                <label for="lgpd" style="font-size: 0.8rem; color: var(--cor-cinza-texto); cursor: pointer;">
+                  Concordo com o tratamento dos meus dados conforme a
+                  <a href="#" style="color: var(--cor-ouro);">Política de Privacidade</a>
+                  (LGPD — Lei 13.709/2018) *
+                </label>
+              </div>
+
+              <!-- type="submit" → dispara o evento 'submit' capturado pelo script.js -->
+              <button type="submit" class="btn-primario" id="btnEnviar" style="width: 100%; justify-content: center;">
+                Enviar Mensagem &#8594;
+              </button>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ╔═════════════════════════════════════════════════════════╗
+       ║  RODAPÉ                                                ║
+       ║  role="contentinfo" → landmark semântico               ║
+       ╚═════════════════════════════════════════════════════════╝ -->
+  <footer class="rodape" role="contentinfo">
+    <div class="container">
+
+      <div class="rodape__grid">
+
+        <div class="rodape__coluna">
+          <div class="rodape__logo">Diagonal<span>Assessoria</span></div>
+          <p class="rodape__descricao">
+            Contabilidade estratégica para empresas que querem crescer com segurança e
+            tranquilidade. Mais de 15 anos cuidando do seu negócio.
+          </p>
+          <nav class="rodape__redes" aria-label="Redes sociais">
+            <a href="#" class="rodape__rede" aria-label="Instagram da Diagonal Assessoria">in</a>
+            <a href="#" class="rodape__rede" aria-label="Facebook da Diagonal Assessoria">fb</a>
+            <a href="#" class="rodape__rede" aria-label="LinkedIn da Diagonal Assessoria">li</a>
+            <a href="#" class="rodape__rede" aria-label="WhatsApp da Diagonal Assessoria">wa</a>
+          </nav>
+        </div>
+
+        <div class="rodape__coluna">
+          <h3 class="rodape__coluna-titulo">Serviços</h3>
+          <ul>
+            <li><a href="#servicos">Abertura de Empresa</a></li>
+            <li><a href="#servicos">Planejamento Tributário</a></li>
+            <li><a href="#servicos">Folha de Pagamento</a></li>
+            <li><a href="#servicos">Contabilidade Digital</a></li>
+            <li><a href="#servicos">Assessoria Fiscal</a></li>
+          </ul>
+        </div>
+
+        <div class="rodape__coluna">
+          <h3 class="rodape__coluna-titulo">Empresa</h3>
+          <ul>
+            <li><a href="#sobre">Sobre Nós</a></li>
+            <li><a href="#mvv">Missão e Valores</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#contato">Trabalhe Conosco</a></li>
+            <li><a href="#contato">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="rodape__coluna">
+          <h3 class="rodape__coluna-titulo">Contato</h3>
+          <ul>
+            <li><a href="tel:+552122223344">(21) 2222-3344</a></li>
+            <li><a href="https://wa.me/5521999998888">(21) 99999-8888</a></li>
+            <li><a href="mailto:contato@contabilgold.com.br">contato@contabilgold.com.br</a></li>
+            <li><a href="#localizacao">Centro, Rio de Janeiro — RJ</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="rodape__bottom">
+        <p>
+          <!-- &copy; = © | <span id="anoAtual"> preenchido pelo script.js -->
+          &copy; <span id="anoAtual"></span> Diagonal Assessoria. Todos os direitos reservados.
+        </p>
+        <p style="font-size: 0.75rem; color: rgba(176,176,176,0.5);">
+          CRC/RJ 000000/O-0 &nbsp;|&nbsp; CNPJ: 00.000.000/0001-00
+        </p>
+        <button
+          class="rodape__topo"
+          onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+          aria-label="Voltar ao topo da página">
+          &#8593;
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+  <!--
+    SCRIPT EXTERNO — no final do <body> (IMPORTANTE!)
+    
+    Por que aqui e não no <head>?
+    • O HTML é processado de cima para baixo
+    • Aqui, todo o DOM já está construído quando o JS executa
+    • getElementById() e querySelector() encontram os elementos
+    
+    Alternativa: <script src="script.js" defer> no <head>
+    "defer" → adia a execução para após o parse completo do HTML
+  -->
+  <script src="script.js"></script>
+
+</body>
+</html>

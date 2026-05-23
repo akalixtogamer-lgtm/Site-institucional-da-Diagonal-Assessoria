@@ -1,0 +1,1627 @@
+/* ================================================================
+   style.css — Diagonal Assessoria Contábil
+   Versão refatorada com paleta de cores corrigida,
+   navbar transparente → sólida, parallax e animações completas
+   ================================================================
+
+   ÍNDICE DE SEÇÕES:
+   1.  Variáveis CSS (Design Tokens — paleta oficial do esquema de cores)
+   2.  Reset e Base
+   3.  Utilitários
+   4.  Botões
+   5.  Animações (@keyframes)
+   6.  Navbar (fixada, transparente → sólida ao rolar)
+   7.  Hero (parallax, conteúdo, CTAs, seta de scroll)
+   8.  Serviços (cards em grid)
+   9.  Sobre Nós
+   10. Missão, Visão e Valores
+   11. Depoimentos (carrossel)
+   12. Localização e Contato
+   13. Formulário de Contato
+   14. Rodapé
+   15. Media Queries
+   16. Intersection Observer (animações ao entrar na tela)
+   ================================================================ */
+
+
+/* ================================================================
+   1. VARIÁVEIS CSS — Design System / Tokens
+   ----------------------------------------------------------------
+   Paleta extraída do ESQUEMA DE CORES OFICIAL (UI):
+
+   ── DOURADO como identidade ──────────────────────────────────
+   Família #C9A84C e #D4C08B → autoridade, prosperidade.
+   Usados em destaque, CTAs e pontos focais.
+
+   ── PRETO e CINZAS como estrutura ────────────────────────────
+   Família #1C1C1C → #4C4C4C → contraste e hierarquia visual.
+   Fundos, cards, bordas e separadores.
+
+   ── TONS BEGE/CREME como respiro ─────────────────────────────
+   #F7F2EA, #FFFCC0, #E8DFC8 → tradição e estabilidade.
+   Backgrounds de seções alternadas, badges e destaques.
+
+   ── TÉCNICO (#E1E9F8) ────────────────────────────────────────
+   Seções de dados, serviços e precisão contábil.
+
+   REGRA DE USO (esquema):
+   Dourado vibrante (CTAs principal 1-2) + dourado escolhido
+   (#C9A84C) + escuro (#1C1C1C) formam a identidade.
+   ================================================================ */
+:root {
+  /* ── Ouro— Identidade da Marca ───────────────────────── */
+  --ouro-vibrante-principal:   #C9A84C;   /* Principal: botões, destaques, ícones */
+  --ouro-vibrante-escuro: #AB8F41;   /* Variante clara: hover, gradientes suaves */
+  --ouro-vibrante-escuro-2: #8D7635;   /* Dourado escuro para hover em elementos dourados */
+  --ouro-vibrante-fundo:  #FFF7CC;   /* Fundo de seções de destaque, badges, detalhes */
+  --ouro-vibrante-escuro:     #463B1B;   /* Texto escuro */
+  --ouro-vibrante-escuro:   #AB8F41;  /* Dourado escuro com transparência para sobreposições */
+  --ouro-vibrante-escuro-2:  #8D7635;   /* Dourado escuro para hover em elementos dourados */
+  --ouro-vibrante-escuro-3:   #655426;   /* Dourado com 30% de opacidade para sombras e detalhes */
+  --ouro-vibrante-claro-alpha:   #D1B567;  /* Dourado claro com transparência para hover em fundos escuros */
+  --ouro-claro-2: #D9C282;   /* Dourado claro para hover em fundos escuros */
+  --ouro-claro-3: #E4D4A6;   /* Dourado claro para detalhes em fundos escuros uma possibilidade */
+  --ouro-claro-4: #E4D4A6;   /* Dourado claro para detalhes em fundos escuros outra possibilidade */
+  --ouro-claro-5: #F7F2E4;   /* Dourado claro para detalhes em fundos escuros terceira possibilidade */
+
+/*ouro vibrante */
+--ouro-vibrante-principal: #C9A84C;   /* Principal: botões, destaques, ícones */
+--ouro-vibrante-escuro: #AB8F41;   /* Variante clara: hover, gradientes suaves */
+--ouro-vibrante-escuro-2: #8D7635;   /* Dourado escuro para hover em elementos dourados */
+--ouro-vibrante-escuro-3: #655426;   /* Dourado com 30% de opacidade para sombras e detalhes */
+--ouro-vibrante-escuro-4: #463B1B;   /* Dourado escuro para hover em elementos dourados */
+--ouro-vibrante-claro: #D1B567;  /* Dourado claro com transparência para hover em fundos escuros */
+--ouro-vibrante-claro-2: #D9C282;   /* Dourado claro para hover em fundos escuros */
+--ouro-vibrante-claro-3: #E4D4A6;   /* Dourado claro para detalhes em fundos escuros uma possibilidade */
+--ouro-vibrante-claro-4: #EFE5C9;   /* Dourado claro para detalhes em fundos escuros outra possibilidade */
+--ouro-vibrante-claro-5: #F7F2E4;   /* Dourado claro para detalhes em fundos escuros terceira possibilidade */
+
+/*ouro velho*/
+--ouro-velho-principal: #8C7332;   /* Principal: botões, destaques, ícones */
+--ouro-velho-escuro: #77622B;   /* Variante clara: hover, gradientes suaves */
+--ouro-velho-escuro-2: #625123;   /* Dourado escuro para hover em elementos dourados */
+--ouro-velho-escuro-3: #463A19;   /* Dourado com 30% de opacidade para sombras e detalhes */
+--ouro-velho-escuro-4: #312812;   /* Dourado escuro para hover em elementos dourados */
+--ouro-velho-claro: #9D8851;  /* Dourado claro com transparência para hover em fundos escuros */
+--ouro-velho-claro-2: #AF9D70;   /* Dourado claro para hover em fundos escuros */
+--ouro-velho-claro-3: #C6B999;   /* Dourado claro para detalhes em fundos escuros uma possibilidade */
+--ouro-velho-claro-4: #DDD5C2;   /* Dourado claro para detalhes em fundos escuros outra possibilidade */
+--ouro-velho-claro-5: #EEEAE0;   /* Dourado claro para detalhes em fundos escuros terceira possibilidade */
+ 
+/*AMARELO*/
+  --amarelo-principal: #FDC808;   /* Amarelo vibrante para destaques e CTAs */
+  --amarelo-escuro-1: #D7AA07;   /* Amarelo escuro para hover em elementos amarelos */
+  --amarelo-escuro-2: #B18C06;   /* Amarelo escuro para hover em elementos amarelos mais escuros */
+  --amarelo-escuro-3: #7F6404;   /* Amarelo escuro para hover em elementos amarelos ainda mais escuros */
+  --amarelo-escuro-4: #594603;   /* Amarelo escuro para hover em elementos amarelos muito escuros */
+  --amarelo-claro-1: #FDD02D;   /* Amarelo claro para hover em fundos escuros */
+  --amarelo-claro-2: #FED952;   /* Amarelo claro para hover em fundos escuros */
+  --amarelo-claro-3: #FEE484;   /* Amarelo claro para hover em fundos escuros */
+  --amarelo-claro-4: #FEEFB5;   /* Amarelo claro para hover em fundos escuros */
+  --amarelo-claro-5: #FFF7DA;   /* Amarelo claro para hover em fundos escuros */
+
+  /* ── Pretos  — Estrutura ─────────────────────────── */
+  --preto-principal: #1E1E1E;   /* Fundo principal (hero, navbar sólida) */
+  --preto-tom-escuro-1:#1B1B1B;   /* Fundo secundário (seções alternadas) */
+  --preto-tom-escuro-2:#181818;   /* Cards, formulários, wrappers */
+  --preto-tom-escuro-3:#151515;   /* Bordas e separadores */
+  --preto-tom-escuro-4:#121212;   /* Textos secundários, labels, subtítulos */
+  --preto-tom-claro-1:#404040;   /* Textos sobre fundos escuros */
+  --preto-tom-claro-2:#626262;   /* Textos sobre fundos escuros, detalhes */
+  --preto-tom-claro-3:#8F8F8F;   /* Textos sobre fundos escuros, detalhes secundários */
+  --preto-tom-claro-4:#BCBCBC;   /* Textos sobre fundos escuros, detalhes terciários */
+  --preto-tom-claro-5:#DDDDDD;   /* Textos sobre fundos escuros, detalhes quaternários */
+
+/*brancos*/ 
+  --branco-principal: #EEEEEE;   /* Cinza claro para fundos e detalhes */
+  --branco-escuro-1: #D6D6D6;   /* Cinza médio para bordas e separadores */
+   --branco-escuro-2: #B3B3B3;   /* Cinza mais escuro para detalhes e textos secundários */
+   --branco-escuro-3: #8F8F8F;   /* Cinza escuro para textos sobre fundos claros */
+   --branco-escuro-4: #6B6B6B;   /* Cinza escuro para textos sobre fundos claros, detalhes */
+   --branco-claro-1: #F0F0F0;   /* Cinza muito claro para fundos e detalhes */
+   --branco-claro-2: #F1F1F1;   /* Cinza claro para fundos e detalhes */
+   --branco-claro-3: #F5F5F5;   /* Cinza claro para fundos e detalhes */
+   --branco-claro-4: #F8F8F8;   /* Cinza claro para fundos e detalhes */
+   --branco-claro-5: #FCFCFC;   /* Cinza claro para fundos e detalhes */
+
+/* ── Cinza para textos e detalhes ─────────────────────────── */
+   --cinza-principal: #545454   ;   /* Cinza escuro para textos sobre fundos claros */
+   --cinza-escuro: #6E6E6E;   /* Cinza médio para textos sobre fundos claros */
+   --cinza-escuro-2: #878787;   /* Cinza mais claro para textos sobre fundos claros, detalhes */
+   --cinza-escuro-3: #AAAAAA;   /* Cinza claro para textos sobre fundos claros, detalhes secundários */
+   --cinza-escuro-4: #CCCCCC;   /* Cinza muito claro para textos sobre fundos claros, detalhes terciários */
+   --cinza-escuro-5: #E5E5E5;   /* Cinza quase branco para textos sobre fundos claros, detalhes quaternários */
+   --cinza-claro-1: #474747;   /* Cinza claro para fundos e detalhes */
+   --cinza-claro-2: #3B3B3B;   /* Cinza claro para fundos e detalhes */
+   --cinza-claro-3: #2A2A2A;   /* Cinza claro para fundos e detalhes */
+    --cinza-claro-4: #1D1D1D;   /* Cinza claro para fundos e detalhes */
+
+/*BEGE*/
+  --bege-fundo-principal: #FFF7CC;   /* Fundo de seções de destaque (sobre, MVV) */
+  --bege-escuro:  #D9D2AD;   /* Bordas e detalhes em modo claro */
+  --bege-escuro-2:#B3AD8F;   /* Bordas e detalhes em modo claro alternativa */
+  --bege-escuro-3:#807C66;   /* Bordas e detalhes em modo claro alternativa 2 */
+  --bege-escuro-4:#595647;   /* Bordas e detalhes em modo claro alternativa 3 */
+  --bege-claro:     #FFF8D4;   /* Badge, tags, destaques em fundos claros */
+  --bege-claro-2:   #FFF9DB;   /* Badge, tags, destaques em fundos claros alternativa */
+  --bege-claro-3:   #FFFBE6;   /* Badge, tags, destaques em fundos claros alternativa 2 */
+  --bege-claro-4:   #FFFDF0;   /* Badge, tags, destaques em fundos claros alternativa 3 */
+  --bege-claro-5:   #FFFEF7;   /* Badge, tags, destaques em fundos claros alternativa 4 */
+
+/*azul*/
+  --azul-principal: #E1E9F0;   /* Fundo de seções técnicas/serviços */
+  --azul-escuro-2: #BFC6CC;   /* Fundo de seções técnicas/serviços alternativa 6 */
+  --azul-escuro-3: #9EA3A8;   /* Fundo de seções técnicas/serviços alternativa 7 */
+  --azul-escuro-3: #717578;   /* Fundo de seções técnicas/serviços alternativa 8 */
+  --azul-escuro-4: #4F5254;   /* Fundo de seções técnicas/serviços alternativa 4 */
+  --azul-claro-1: #E6ECF2;   /* Fundo de seções técnicas/serviços alternativa */
+  --azul-claro-2: #EAF0F5;   /* Fundo de seções técnicas/serviços alternativa 2 */
+  --azul-claro-3: #F0F4F8;   /* Fundo de seções técnicas/serviços alternativa 3 */
+  --azul-claro-4: #F6F8FB;   /* Fundo de seções técnicas/serviços alternativa 4 */
+  --azul-claro-5: #FBFCFD;   /* Fundo de seções técnicas/serviços alternativa 5 */
+  
+/* ── Bege/Creme — Respiro e Tradição ─────────────────────── */
+  --creme-principal: #F7F2EA;   /* Fundo de seções de destaque (sobre, MVV) */
+  --creme-claro:     #FFFCC0;   /* Badge, tags, destaques em fundos claros */
+  --creme-medio:     #E8DFC8;   /* Bordas e detalhes em modo claro */
+
+  /* ── Técnico — Serviços e Dados ──────────────────────────── */
+  --tecnico-azul:    #E1E9F8;   /* Fundo de seções técnicas/serviços */
+
+  /* ── Branco ────────────────────────────────────────────────  */
+  --branco:          #FFFFFF;
+
+  /*Funcionalidades segundo o Design System*/
+  /*header e navegação*/
+  --ouro-principal:   #C9A84C;   /*Logo e nome da empresa no topo da página*/
+  --ouro-ativo:   #8D7635;   /*links de naveção ativos e houver no meu principal*/
+  --ouro-houver:   #AB8F41;   /*links de naveção ativos e houver no meu principal*/
+  --bege-fundo-principal: #FFF7CC;   /*Fundo claro do header para criar leveza sem perder identidade*/;
+
+  /*Cards de serviços (Contabilidade, fiscal, DP, consultoria e etc.)*/
+  --cinza-principal: #EEEEEE;   /*Fundo neutro dos cards - não compete com o conteúdo principal da página*/
+  --branco-claro-3: #F5F5F5;   /*Houver nos cards*/
+  --ouro-principal: #C9A84C;   /*Ícones de cada serviço em dourado para reforçar a identidade da marca*/
+  --amarelo-principal: #FDC808;   /*Borda superior do card em amarelo vibrante para destaque visual*/
+  --cinza-principal: #545454;   /*Texto descritivo em cinza escuro - profissional e legível*/
+
+ /*Numeros e estatisticas (Clientes atendidos, anos de mercado, CNPJs etc.)*/
+ --azul-principal: #E1E9F8;   /*Fundo azul claro para transmitir confiança e precisão*/
+ --preto-principal: #1E1E1E;   /*Números grandes, para máxima legibilidade*/
+ --amarelo-principal: #FDC808;   /*Números ou símbolos de destaque especiais*/
+ --azul-escuro-3: #717578;   /*Rótulos descritivos abaixo dos números*/
+
+ /*Formulário de contato / CTA final*/
+  --branco-claro-1: #F0F0F0;   /*Fundo para blocos de métricas*/
+  --cinza-escuro-4: #CCCCCC;   /*Bordas dos campos de input em cinza médio — neutros e profissionais*/
+  --amarelo-principal: #FDC808;   /*Botão de envio em amarelo vibrante — o maior ponto focal da conversão*/
+  --amarelo-escuro-1: #D7AA07;   /*Estado hover do botão levemente mais escuro — feedback visual claro*/
+
+  /*Hero / Banner principal (Primeira impressão e Call to Action)*/
+  --amarelo-principal: #FDC808;   /*Botão de CTA principal (“Fale conosco”, “Solicitar orçamento”) - transmite confiança e urgência*/
+  --bege-principal: #FFF7CC;   /*Fundo suave da seção hero, evitando contraste agressivo*/
+  --ouro-vibrante: #C9A84C;   /*Elementos decorativos e ícones de destaque ao redor do título*/
+  --preto-principal: #1E1E1E;   /*Título principal em preto para máxima legibilidade e impacto visual*/
+
+  /*Seção “Sobre nós” / Diferenciais (Transmissão de autoridade e tradição)*/
+  --bege-claro: #F7F2E4;   /* Fundo da seção em bege suave - cria a sensação de solidez e tradição, ideal para escritórios */
+  --ouro-velho-principal: #8C7332;   /*Texto das tags em (#8C7332) sobre o fundo claro - contraste correto dentro da família*/
+  --ouro-vibrante-escuro-4: #462b1b;   /*Corpo de texto em marrom-escuro quente - mais aconchegante que preto puro*/
+  --ouro-vibrante-principal:#C9A84C; /*Corpo de texto em marrom-escuro quente - mais aconchegante que preto puro*/
+  
+  /*Depoimentos de clientes (Prova social e confiança)*/
+  --branco-claro-5: #FCFCFC;   /*Corpo de texto em marrom-escuro quente - mais aconchegante que preto puro*/
+  --ouro-vibrante-principal:#C9A84C; /*Ícone de aspas em dourado para dar personalidade e remetendo à marca*/
+  --amarelo-principal: #FDC808;   /*Estrelas de avaliação em amarelo vibrante — familiar e legível*/
+  --cinza-principal: #545454;   /*Texto do depoimento em cinza escuro para leitura confortável*/
+  /*Rodapé (Links, contato, redes sociais e legal)*/
+  --preto-principal: #1E1E1E;   /*Fundo do rodapé para criar contraste e delimitar a seção*/
+  --ouro-vibrante: #C9A84C;   /*Nome/logo da empresa em dourado sobre o fundo escuro*/
+  --preto-tom-claro-5:#DDDDDD; /*Links e textos informativos em cinza claro para boa legibilidade no escuro*/
+  --ouro-velho-principal: #8C7332;   /*Hover dos links em dourado escuro — mantém coerência da identidade visual*/
+
+--bege-principal: #FFF7CC;   /*Fundo claro do header para criar leveza sem perder identidade*/
+
+  
+ --ouro-velho-principal: #8C7332;   /*Texto das tags em (#8C7332) sobre o fundo claro - contraste correto dentro da família*/
+ --branco-principal: #EEEEEE; /*Badges neutros (#EEEEEE) para categorias sem destaque especial (“Tributário”,”Fiscal”)*/
+ 
+
+
+  /* ── Tipografia ───────────────────────────────────────────── */
+ --fonte-titulo-principal: 'montserrat'; /* Títulos principais (hero, seções) */
+ --fonte-titulo-secao: 'montserrat'; /* Títulos de seção (serviços, sobre) */
+ --fonte-subtitulo:'montserrat'; /* Subtítulos e textos de apoio */
+ --fonte-corpo-principal:'roboto'; /* Textos corridos, descrições, parágrafos */
+ --fonte-texto-de-ui:'inter'; /* Textos de interface, labels, botões menores */
+ --fonte-menu-navegacao:'inter'; /* Menu da navbar, links de navegação */
+
+  /* ── Sistema de Espaçamento (base 8px) ───────────────────── */
+  --espaco-xs:  8px;
+  --espaco-sm:  16px;
+  --espaco-md:  32px;
+  --espaco-lg:  64px;
+  --espaco-xl:  96px;
+
+  /* ── Bordas Arredondadas ──────────────────────────────────── */
+  --raio-sm:  4px;
+  --raio-md:  8px;
+  --raio-lg:  12px;
+
+  /* ── Transição Padrão ─────────────────────────────────────── */
+  --transicao: 0.35s ease;
+
+  /* ── Altura da Navbar (usada para compensar position:fixed) ── */
+  --altura-navbar: 72px;
+}
+
+
+/* ================================================================
+   2. RESET E BASE
+   ================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin:  0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Scroll snapping desativado — livre para rolagem natural */
+}
+
+body {
+  font-family:      var(--fonte-titulo-secao), var(--fonte-subtitulo), var(--fonte-corpo-principal);
+  background-color: var(--preto-principal); /* Fundo escuro para destacar os elementos dourados e criar contraste */
+  color:            var(--ouro-vibrante-principal); /* Texto em dourado para reforçar a identidade da marca */
+  line-height:      1.7;
+  font-size:        16px;
+  overflow-x:       hidden;
+}
+
+a {
+  text-decoration: none;
+  color:           inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display:   block;
+}
+
+
+/* ================================================================
+   3. UTILITÁRIOS
+   ================================================================ */
+
+.container {
+  max-width:      1200px;
+  margin-inline:  auto;
+  padding-inline: var(--espaco-sm);
+}
+
+/* Divisor dourado decorativo */
+.divisor-ouro {
+  width:            60px;
+  height:           3px;
+  background:       linear-gradient(90deg, var(--ouro-vibrante-principal), var(--ouro-velho-principal));
+  margin:           var(--espaco-sm) auto;
+  border-radius:    2px;
+}
+
+/* Tag de destaque — usa bege/creme sobre escuro */
+.tag-ouro {
+  display:        inline-block;
+  font-size:      0.72rem;
+  font-weight:    700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color:          var(--cinza-);
+  margin-bottom:  var(--espaco-xs);
+}
+
+/* Títulos de seção */
+.titulo-secao {
+  font-family: var(--fonte-titulo);
+  font-size:   clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Subtítulo de seção */
+.subtitulo-secao {
+  font-size:  1rem;
+  color:      var(--branco-claro-3);
+  margin-top: var(--espaco-sm);
+  max-width:  600px;
+}
+
+
+/* ================================================================
+   4. BOTÕES
+   ================================================================ */
+
+/* Botão Primário — dourado vibrante (máximo destaque, CTA 1) */
+.btn-primario {
+  display:          inline-flex;
+  align-items:      center;
+  gap:              8px;
+  padding:          13px 30px;
+  background:       linear-gradient(135deg, var(--ouro-vibrante-principal), var(--ouro-velho-principal));
+  color:            var(--preto-principal);
+  font-family:      var(--fonte-corpo);
+  font-weight:      700;
+  font-size:        0.875rem;
+  letter-spacing:   0.06em;
+  text-transform:   uppercase;
+  border:           none;
+  border-radius:    var(--raio-sm);
+  cursor:           pointer;
+  transition:       background var(--transicao),
+                    transform  var(--transicao),
+                    box-shadow var(--transicao);
+}
+
+
+.btn-primario:hover {
+  background:  linear-gradient(135deg, var(--ouro-velho-principal), var(--ouro-vibrante-principal));
+  transform:   translateY(-2px);
+  box-shadow:  0 8px 24px var(--ouro-vibrante-escuro-3);
+}
+
+/* Botão Secundário — borda dourada, transparente */
+.btn-secundario {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            8px;
+  padding:        11px 28px;
+  background:     transparent;
+  color:          var(--ouro-secundario);
+  font-family:    var(--fonte-corpo);
+  font-weight:    700;
+  font-size:      0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border:         2px solid var(--ouro-vibrante-principal);
+  border-radius:  var(--raio-sm);
+  cursor:         pointer;
+  transition:     all var(--transicao);
+}
+
+.btn-secundario:hover {
+  background:  var(--ouro-vibrante-principal);
+  color:       var(--preto-principal);
+  box-shadow:  0 6px 20px var(--ouro-alpha-40);
+}
+
+
+/* ================================================================
+   5. ANIMAÇÕES — @keyframes
+   ================================================================ */
+
+/* Fade-in com subida suave */
+@keyframes fadeInUp {
+  from {
+    opacity:   0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity:   1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-in simples */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Pulso dourado no CTA principal */
+@keyframes pulso {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 200, 74, 0.5); }
+  50%       { box-shadow: 0 0 0 14px rgba(232, 200, 74, 0); }
+}
+
+/* Bounce da seta de scroll */
+@keyframes scrollBounce {
+  0%, 100% { transform: rotate(45deg) translate(0, 0);     opacity: 1;   }
+  50%       { transform: rotate(45deg) translate(5px, 5px); opacity: 0.4; }
+}
+
+/* Entrada de elementos da esquerda */
+@keyframes slideInLeft {
+  from {
+    opacity:   0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity:   1;
+    transform: translateX(0);
+  }
+}
+
+/* Brilho deslizante (shimmer) — para elementos de destaque */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+
+/* ================================================================
+   6. NAVBAR
+   ----------------------------------------------------------------
+   ESTRATÉGIA:
+   • position: fixed → flutua sobre o conteúdo o tempo todo
+   • Começa transparente (background: transparent)
+   • Classe .navbar--scrolled adicionada pelo JS após 50px de scroll
+     → ativa o fundo escuro + blur (glassmorphism)
+   • transition suaviza a troca entre os dois estados
+   
+   PARALLAX DA NAVBAR:
+   O efeito "desce junto com a página" vem do position: fixed
+   combinado com o JS que controla opacity/background via scroll.
+   O conteúdo rola por baixo enquanto a navbar permanece no topo.
+   
+   COMPENSAÇÃO NO LAYOUT:
+   Como a navbar está fora do fluxo (fixed), o Hero precisa de
+   padding-top: var(--altura-navbar) para não ficar escondido.
+   ================================================================ */
+.navbar {
+  position:         fixed;
+  top:              0;
+  left:             0;
+  right:            0;
+  z-index:          1000;
+
+  /* ESTADO INICIAL: totalmente transparente */
+  background-color: transparent;
+  backdrop-filter:  none;
+  -webkit-backdrop-filter: none;
+  border-bottom:    1px solid transparent;
+
+  /* Transição suave entre transparente e sólido */
+  transition:
+    background-color 0.45s ease,
+    border-color     0.45s ease,
+    backdrop-filter  0.45s ease;
+}
+
+/*
+  ESTADO SÓLIDO — adicionado pelo JavaScript ao detectar scroll > 50px
+  Ativa: fundo escuro semi-opaco + blur (glassmorphism) + borda
+*/
+.navbar--scrolled {
+  background-color: var(--preto-principal);
+  backdrop-filter:  blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--preto-4);
+}
+
+.navbar__inner {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding-block:   20px;
+  height:          var(--altura-navbar);
+}
+
+.navbar__logo {
+  font-family: var(--fonte-titulo);
+  font-size:   1.4rem;
+  font-weight: 700;
+  color:       var(--branco-principal);
+  letter-spacing: 0.02em;
+}
+/* "Gold" em dourado vibrante — identidade da marca */
+.navbar__logo span {
+  color: var(--ouro-vibrante-principal);
+}
+
+.navbar__links {
+  display:     flex;
+  align-items: center;
+  gap:         2rem;
+  list-style:  none;
+}
+
+.navbar__links a {
+  font-size:      0.82rem;
+  font-weight:    500;
+  color:          var(--branco-principal);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  position:       relative;
+  transition:     color var(--transicao);
+}
+.navbar__links .btn-nav {
+  font-size:      0.82rem;
+  font-weight:    500;
+  color:          var(--preto-principal);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  position:       relative;
+  transition:     color var(--transicao);
+}
+
+.btn-nav{
+   display:          inline-flex;
+  align-items:      center;
+  gap:              8px;
+  padding:          13px 30px;
+  background:       linear-gradient(135deg, var(--ouro-vibrante-principal), var(--ouro-velho-principal));
+  color:            var(--preto-principal);
+  font-family:      var(--fonte-corpo);
+  font-weight:      700;
+  font-size:        0.875rem;
+  letter-spacing:   0.06em;
+  text-transform:   uppercase;
+  border:           none;
+  border-radius:    var(--raio-sm);
+  cursor:           pointer;
+  transition:       background var(--transicao),
+                    transform  var(--transicao),
+                    box-shadow var(--transicao);
+}
+/* Linha dourada animada no hover */
+.navbar__links a::after {
+  content:          '';
+  position:         absolute;
+  bottom:           -5px;
+  left:             0;
+  width:            0;
+  height:           2px;
+  background:       linear-gradient(90deg, var(--ouro-primario), var(--ouro-vibrante-principal));
+  border-radius:    1px;
+  transition:       width var(--transicao);
+}
+
+.navbar__links a:hover          { color: var(--preto-principal); }
+.navbar__links .btn-nav:hover          { color: var(--branco-principal); }
+.navbar__links a:hover::after   { width: 100%; }
+
+/* Hambúrguer — mobile */
+.navbar__toggle {
+  display:    none;
+  background: none;
+  border:     none;
+  cursor:     pointer;
+  padding:    8px;
+}
+
+.navbar__toggle span {
+  display:    block;
+  width:      24px;
+  height:     2px;
+  background: var(--ouro-vibrante-principal);
+  margin:     5px 0;
+  transition: all var(--transicao);
+  border-radius: 1px;
+}
+
+
+/* ================================================================
+   7. HERO SECTION — Banner Principal
+   ----------------------------------------------------------------
+   PARALLAX:
+   background-attachment: fixed → a imagem de fundo não rola com
+   a página. O conteúdo passa sobre ela, criando profundidade.
+   
+   COMPENSAÇÃO DA NAVBAR FIXED:
+   padding-top: calc(var(--espaco-xl) + var(--altura-navbar))
+   garante que o conteúdo do hero começa abaixo da navbar.
+   
+   OVERLAY:
+   Gradiente duplo — escuro à esquerda para leitura do texto,
+   toque dourado à direita para identidade da marca.
+   ================================================================ */
+.hero {
+  position:       relative;
+  min-height:     100vh;
+  display:        flex;
+  align-items:    center;
+  overflow:       hidden;
+
+  /* Compensa a navbar fixed: conteúdo começa abaixo dela */
+  padding-top:    calc(var(--espaco-xl) + var(--altura-navbar));
+  padding-bottom: var(--espaco-xl);
+
+  /* Overlay escuro + toque dourado + imagem de fundo */
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(28, 28, 28, 0.93) 0%,
+      rgba(28, 28, 28, 0.72) 55%,
+      rgba(201, 168, 76, 0.18) 100%
+    ),
+    url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80');
+
+  background-size:       cover;
+  background-position:   center;
+  background-attachment: fixed; /* ← PARALLAX: imagem fica estática, conteúdo rola */
+  background-repeat:     no-repeat;
+}
+
+/* Ornamento geométrico — círculo dourado parcialmente cortado */
+.hero::before {
+  content:        '';
+  position:       absolute;
+  top:            15%;
+  right:          -100px;
+  width:          400px;
+  height:         400px;
+  border:         1px solid rgba(201, 168, 76, 0.15);
+  border-radius:  50%;
+  pointer-events: none;
+}
+
+.hero::after {
+  content:        '';
+  position:       absolute;
+  top:            25%;
+  right:          -50px;
+  width:          250px;
+  height:         250px;
+  border:         1px solid rgba(201, 168, 76, 0.08);
+  border-radius:  50%;
+  pointer-events: none;
+}
+
+.hero__conteudo {
+  max-width:       660px;
+  position:        relative;
+  z-index:         1;
+  animation:       fadeInUp 0.9s ease both;
+}
+
+/* Tag de identificação (acima do título) */
+.hero__tag {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            10px;
+  font-size:      0.72rem;
+  font-weight:    700;
+  color:          var(--ouro-primario);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom:  var(--espaco-sm);
+}
+
+.hero__tag::before {
+  content:       '';
+  display:       block;
+  width:         32px;
+  height:        1px;
+  background:    linear-gradient(90deg, var(--ouro-primario), transparent);
+}
+
+.hero__titulo {
+  font-family:   var(--fonte-titulo);
+  font-size:     clamp(2.4rem, 5.5vw, 4rem);
+  font-weight:   700;
+  line-height:   1.12;
+  margin-bottom: var(--espaco-sm);
+  color:         var(--branco);
+}
+
+/* Destaque do título — usa dourado vibrante (identidade máxima) */
+.hero__titulo em {
+  font-style: normal;
+  color:      var(--ouro-vibrante);
+  /* Efeito shimmer no texto de destaque */
+  background: linear-gradient(
+    90deg,
+    var(--ouro-vibrante-principal),
+    var(--ouro-vibrante),
+    var(--ouro-vibrante-escuro),
+    var(--ouro-vibrante-principal)
+  );
+  background-size:    200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip:    text;
+  animation:          shimmer 4s linear infinite;
+}
+
+.hero__subtitulo {
+  font-size:     1.05rem;
+  color:         var(--cinza-principal);
+  line-height:   1.75;
+  margin-bottom: var(--espaco-md);
+  max-width:     520px;
+}
+
+.hero__botoes {
+  display:     flex;
+  gap:         var(--espaco-sm);
+  flex-wrap:   wrap;
+  align-items: center;
+}
+
+/* CTA principal com pulso dourado */
+.hero__botoes .btn-primario {
+  animation: pulso 2.5s infinite;
+}
+
+/* Seta de scroll (bounce) */
+.hero__scroll {
+  position:  absolute;
+  bottom:    var(--espaco-md);
+  left:      50%;
+  transform: translateX(-50%);
+  display:   flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:       8px;
+  opacity:   0.7;
+}
+
+.hero__scroll-label {
+  font-size:      0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color:          var(--ouro-vibrante);
+}
+
+.hero__scroll-seta {
+  width:         18px;
+  height:        18px;
+  border-right:  2px solid var(--ouro-vibrante);
+  border-bottom: 2px solid var(--ouro-vibrante );
+  transform:     rotate(45deg);
+  animation:     scrollBounce 1.6s infinite;
+}
+
+
+/* ================================================================
+   8. SEÇÃO DE SERVIÇOS
+   ----------------------------------------------------------------
+   Fundo técnico: usa --tecnico-azul muito sutilmente sobreposto
+   ao escuro — transmite precisão e profissionalismo contábil.
+   
+   Na prática: o fundo principal é escuro (preto-2), com o padrão
+   geométrico e uma leve influência azulada para diferenciar.
+   ================================================================ */
+.servicos {
+  padding-block:    var(--espaco-xl);
+  background-color: var(--preto-2);
+  /* Padrão geométrico sutil como textura de fundo */
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40L40 0' stroke='%23ffffff06' fill='none'/%3E%3C/svg%3E");
+  position: relative;
+}
+
+/* Borda superior em gradiente dourado */
+.servicos::before {
+  content:    '';
+  position:   absolute;
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     2px;
+  background: linear-gradient(90deg, transparent, var(--ouro-primario), transparent);
+}
+
+.servicos__cabecalho {
+  text-align:    center;
+  margin-bottom: var(--espaco-lg);
+}
+
+.servicos__grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap:                   var(--espaco-sm);
+}
+
+.card-servico {
+  background:     var(--azul-claro-2);
+  border:         1px solid var(--preto-4);
+  border-radius:  var(--raio-lg);
+  padding:        var(--espaco-md);
+  transition:
+    transform    var(--transicao),
+    border-color var(--transicao),
+    box-shadow   var(--transicao);
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--espaco-sm);
+  cursor:         default;
+}
+
+.card-servico:hover {
+  transform:    translateY(-7px);
+  border-color: var(--preto-2);
+  box-shadow:   var(--ouro-velho-claro) 0px 12px 24px;
+}
+
+.card-servico__icone {
+  width:           52px;
+  height:          52px;
+  background:      var(--ouro-primario);
+  border:          1px solid var(--ouro-escuro-4);
+  border-radius:   var(--raio-md);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       1.5rem;
+  transition:      background var(--transicao);
+}
+
+.card-servico:hover .card-servico__icone {
+  background: var(--ouro-primario);
+}
+
+.card-servico__titulo {
+  font-family: var(--fonte-titulo-principal);
+  font-size:   1.15rem;
+  font-weight: 700;
+  color:       var(--preto-principal);
+}
+
+.card-servico__texto {
+  font-size:   0.88rem;
+  color:       var(--cinza-principal);
+  line-height: 1.65;
+  flex-grow:   1;
+}
+
+.card-servico__link {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            6px;
+  font-size:      0.78rem;
+  font-weight:    700;
+  color:          var(--ouro-primario);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:     gap var(--transicao), color var(--transicao);
+}
+.card-servico__link:hover {
+  gap:   11px;
+  color: var(--ouro-vibrante-escuro);
+}
+
+
+/* ================================================================
+   9. SEÇÃO SOBRE NÓS
+   ----------------------------------------------------------------
+   Usa fundo creme/bege como "respiro" — diferencia visualmente
+   das seções escuras. Transmite tradição e confiança.
+   Textos adaptados: preto para legibilidade sobre fundo claro.
+   ================================================================ */
+.sobre {
+  padding-block:    var(--espaco-xl);
+  background-color: var(--tecnico-azul);  /* ← BEGE/CREME — respiro */
+  color:            var(--preto-principal);
+  position:         relative;
+  overflow:         hidden;
+}
+
+/* Detalhe geométrico de canto */
+.sobre::after {
+  content:        '';
+  position:       absolute;
+  bottom:         -80px;
+  right:          -80px;
+  width:          300px;
+  height:         300px;
+  border:         1px solid var(--ouro-primario);
+  border-radius:  50%;
+  pointer-events: none;
+}
+
+.sobre__layout {
+  display:     flex;
+  gap:         var(--espaco-lg);
+  align-items: center;
+  flex-wrap:   wrap;
+}
+
+.sobre__imagem-col {
+  flex:     1 1 400px;
+  position: relative;
+}
+
+.sobre__imagem-wrapper {
+  position:      relative;
+  border-radius: var(--raio-lg);
+  overflow:      hidden;
+  box-shadow:    0 32px 64px var(--ouro-velho-claro);
+}
+
+.sobre__imagem-wrapper img {
+  width:      100%;
+  height:     460px;
+  object-fit: cover;
+  display:    block;
+  filter:     grayscale(25%) sepia(10%);
+  transition: filter var(--transicao);
+}
+.sobre__imagem-wrapper:hover img { filter: grayscale(0%) sepia(0%); }
+
+/* Badge de anos de experiência — usa dourado sobre escuro */
+.sobre__badge {
+  position:      absolute;
+  bottom:        -20px;
+  right:         -20px;
+  background:    linear-gradient(135deg, var(--ouro-velho-principal), var(--cinza-principal));
+  color:         var(--branco);
+  padding:       var(--espaco-sm) var(--espaco-md);
+  border-radius: var(--raio-md);
+  text-align:    center;
+  box-shadow:    0 8px 24px var(--amarelo-escuro-4);
+}
+.sobre__badge strong {
+  display:     block;
+  font-size:   2.2rem;
+  font-family: var(--fonte-titulo);
+  line-height: 1;
+}
+.sobre__badge span { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+
+.sobre__texto-col {
+  flex:        1 1 400px;
+  padding-top: 20px;
+}
+
+/* Título na seção clara: usa preto em vez de branco */
+.sobre .titulo-secao { color: var(--preto-principal); }
+
+/* Subtítulo na seção clara */
+.sobre .subtitulo-secao { color: var(--preto-principal); }
+
+/* Divisor na seção clara: mantém dourado */
+.sobre .divisor-ouro { margin: var(--espaco-sm) 0; }
+
+.sobre__lista {
+  margin-top:     var(--espaco-md);
+  display:        flex;
+  flex-direction: column;
+  gap:            14px;
+}
+
+.sobre__item {
+  display:     flex;
+  align-items: flex-start;
+  gap:         12px;
+}
+
+.sobre__item-icone {
+  width:           30px;
+  height:          30px;
+  min-width:       30px;
+  background:      var(--amarelo-escuro-4);
+  border:          1px solid var(--amarelo-escuro-4);
+  border-radius:   50%;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       0.88rem;
+  margin-top:      2px;
+}
+
+.sobre__item strong { color: var(--preto-principal); font-size: 0.95rem; display: block; }
+.sobre__item p      { font-size: 0.88rem; color: var(--branco-principal); margin-top: 2px; }
+
+
+/* ================================================================
+   10. MISSÃO, VISÃO E VALORES
+   ----------------------------------------------------------------
+   Fundo escuro gradiente — retorna ao modo escuro após o respiro
+   bege da seção Sobre. Cria ritmo de alternância visual.
+   ================================================================ */
+.mvv {
+  padding-block: var(--espaco-xl);
+  background:    linear-gradient(180deg, var(--preto-4) 0%, var(--branco-claro-4) 100%);
+  position:      relative;
+}
+
+.mvv::before {
+  content:    '';
+  position:   absolute;
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     2px;
+  background: linear-gradient(90deg, transparent, var(--ouro-primario), transparent);
+}
+
+.mvv__cabecalho {
+  text-align:    center;
+  margin-bottom: var(--espaco-lg);
+}
+
+.mvv__grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:                   var(--espaco-md);
+}
+
+.mvv__card {
+  background:    var(--ouro-escuro-4);
+  border:        1px solid var(--preto-4);
+  border-top:    3px solid var(--ouro-primario);
+  border-radius: 0 0 var(--raio-lg) var(--raio-lg);
+  padding:       var(--espaco-md);
+  transition:    background var(--transicao), box-shadow var(--transicao);
+}
+.mvv__card:hover {
+  background:  var(--preto-4);
+  box-shadow:  0 12px 32px var(--ouro-velho-claro);
+}
+
+.mvv__card-letra {
+  font-family:   var(--fonte-titulo);
+  font-size:     3.8rem;
+  font-weight:   700;
+  color:         var(--ouro-primario);
+  line-height:   1;
+  margin-bottom: var(--espaco-xs);
+}
+
+.mvv__card-titulo {
+  font-family:   var(--fonte-titulo);
+  font-size:     1.3rem;
+  color:         var(--ouro-primario);
+  margin-bottom: var(--espaco-xs);
+}
+
+.mvv__card p { font-size: 0.88rem; color: var(--branco-principal); line-height: 1.65; }
+
+
+/* ================================================================
+   11. DEPOIMENTOS — Carrossel
+   ================================================================ */
+.depoimentos {
+  padding-block: var(--espaco-xl);
+  background:    var(--bege-escuro-4); /* Fundo bege escuro para diferenciar da seção clara e criar contraste com os cards dourados */
+  overflow:      hidden;
+  position:      relative;
+}
+
+.depoimentos::before {
+  content:    '';
+  position:   absolute;
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     2px;
+  background: linear-gradient(90deg, transparent, var(--ouro-primario), transparent);
+}
+
+.depoimentos__cabecalho {
+  text-align:    center;
+  margin-bottom: var(--espaco-lg);
+}
+
+.depoimentos__track-wrapper { overflow: hidden; }
+
+.depoimentos__track {
+  display:    flex;
+  gap:        var(--espaco-sm);
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.depoimento-card {
+  min-width:     calc(50% - 8px);
+  background:    var(--preto-3);
+  border:        1px solid var(--preto-4);
+  border-radius: var(--raio-lg);
+  padding:       var(--espaco-md);
+  flex-shrink:   0;
+  transition:    border-color var(--transicao);
+}
+.depoimento-card:hover { border-color: var(--ouro-primario); }
+
+.depoimento-card__aspas {
+  font-size:     3.2rem;
+  color:         var(--ouro-primario);
+  font-family:   var(--fonte-titulo);
+  line-height:   0.5;
+  margin-bottom: var(--espaco-sm);
+  opacity:       0.7;
+}
+
+.depoimento-card__texto {
+  font-size:     0.92rem;
+  color:         var(--branco-principal);
+  font-style:    italic;
+  line-height:   1.75;
+  margin-bottom: var(--espaco-md);
+}
+
+.depoimento-card__autor {
+  display:     flex;
+  align-items: center;
+  gap:         12px;
+}
+
+/* Avatar com inicial — cor dourado escuro */
+.depoimento-card__avatar {
+  width:           20px;
+  height:          20px;
+  border-radius:   50%;
+  background:      linear-gradient(135deg, var(--ouro-primario), var(--ouro-escuro));
+  color:           var(--branco-principal);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-weight:     700;
+  font-size:       0.9rem;
+}
+
+.depoimento-card__estrelas {
+  color:         var(--branco-principal);
+  font-size:     0.85rem;
+  margin-bottom: 2px;
+}
+
+/* Controles do carrossel */
+.depoimentos__controles {
+  display:         flex;
+  justify-content: center;
+  align-items:     center;
+  gap:             var(--espaco-sm);
+  margin-top:      var(--espaco-md);
+}
+
+.depoimentos__btn {
+  width:           20px;
+  height:          20px;
+  border-radius:   50%;
+  border:          1px solid var(--branco-claro-3);
+  background:      transparent;
+  color:           var(--ouro-primario);
+  font-size:       1rem;
+  cursor:          pointer;
+  transition:      all var(--transicao);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+}
+.depoimentos__btn:hover {
+  background: var(--preto-4);
+  color:      var(--preto-principal);
+}
+
+.depoimentos__dots { display: flex; gap: 8px; }
+
+.depoimentos__dot {
+  width:         8px;
+  height:        8px;
+  border-radius: 50%;
+  background:    var(--branco-claro-3);
+  border:        none;
+  cursor:        pointer;
+  transition:    all var(--transicao);
+}
+
+.depoimentos__dot.ativo {
+  background:    var(--ouro-primario);
+  width:         24px;
+  border-radius: var(--raio-sm);
+}
+
+
+/* ================================================================
+   12. LOCALIZAÇÃO
+   ================================================================ */
+.localizacao {
+  padding-block: var(--espaco-xl);
+  background:    var(--preto-principal);
+}
+
+.localizacao__cabecalho {
+  text-align:    center;
+  margin-bottom: var(--espaco-lg);
+}
+
+.localizacao__layout {
+  display:     flex;
+  gap:         var(--espaco-md);
+  flex-wrap:   wrap;
+  align-items: stretch;
+}
+
+.localizacao__infos {
+  flex:           1 1 300px;
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--espaco-sm);
+}
+
+.localizacao__item {
+  display:       flex;
+  align-items:   flex-start;
+  gap:           var(--espaco-sm);
+  padding:       var(--espaco-sm);
+  background:    var(--preto-3);
+  border-radius: var(--raio-md);
+  border:        1px solid var(--preto-4);
+  transition:    border-color var(--transicao);
+}
+.localizacao__item:hover { border-color: var(--ouro-primario); }
+
+.localizacao__item-icone { font-size: 1.5rem; min-width: 36px; text-align: center; }
+
+.localizacao__item strong {
+  display:        block;
+  color:          var(--ouro-primario);
+  font-size:      0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom:  3px;
+}
+
+.localizacao__item p { font-size: 0.88rem; color: var(--cinza-texto); }
+
+.localizacao__mapa {
+  flex:          2 1 400px;
+  border-radius: var(--raio-lg);
+  overflow:      hidden;
+  border:        1px solid var(--preto-4);
+  min-height:    300px;
+}
+
+.localizacao__mapa iframe {
+  width:      100%;
+  height:     100%;
+  min-height: 300px;
+  border:     none;
+  filter:     invert(90%) hue-rotate(180deg) saturate(0.8);
+}
+
+
+/* ================================================================
+   13. FORMULÁRIO DE CONTATO
+   ================================================================ */
+.contato {
+  padding-block: var(--espaco-xl);
+  background:    var(--preto-2);
+  position:      relative;
+}
+
+.contato::before {
+  content:    '';
+  position:   absolute;
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     2px;
+  background: linear-gradient(90deg, transparent, var(--ouro-primario), transparent);
+}
+
+.contato__layout {
+  display:   flex;
+  gap:       var(--espaco-lg);
+  flex-wrap: wrap;
+}
+
+.contato__texto { flex: 1 1 320px; }
+
+.contato__lista {
+  margin-top:     var(--espaco-md);
+  display:        flex;
+  flex-direction: column;
+  gap:            12px;
+}
+
+.contato__lista-item {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+  font-size:   0.9rem;
+  color:       var(--cinza-texto);
+}
+
+.contato__lista-item::before {
+  content:     '✓';
+  color:       var(--ouro-primario);
+  font-weight: 700;
+  font-size:   1rem;
+}
+
+.contato__form-wrapper {
+  flex:          1 1 400px;
+  background:    var(--preto-3);
+  border:        1px solid var(--preto-4);
+  border-radius: var(--raio-lg);
+  padding:       var(--espaco-md);
+}
+
+.form {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--espaco-sm);
+}
+
+.form__grupo {
+  display:        flex;
+  flex-direction: column;
+  gap:            6px;
+}
+
+.form__linha {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   var(--espaco-sm);
+}
+
+.form__label {
+  font-size:      0.78rem;
+  font-weight:    700;
+  color:          var(--cinza-texto);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.form__input,
+.form__select,
+.form__textarea {
+  padding:       12px var(--espaco-sm);
+  background:    rgba(255, 255, 255, 0.04);
+  border:        1px solid var(--preto-4);
+  border-radius: var(--raio-md);
+  color:         var(--branco);
+  font-family:   var(--fonte-corpo);
+  font-size:     0.88rem;
+  transition:    border-color var(--transicao),
+                 box-shadow   var(--transicao);
+  width:         100%;
+}
+
+.form__input:focus,
+.form__select:focus,
+.form__textarea:focus {
+  outline:      none;
+  border-color: var(--ouro-primario);
+  box-shadow:   0 0 0 3px var(--ouro-alpha-15);
+}
+
+.form__input::placeholder,
+.form__textarea::placeholder { color: rgba(255, 255, 255, 0.22); }
+
+.form__select {
+  appearance: none;
+  cursor:     pointer;
+}
+.form__select option { background: var(--preto-3); }
+
+.form__textarea {
+  resize:     vertical;
+  min-height: 120px;
+}
+
+.form__sucesso {
+  display:    none;
+  text-align: center;
+  padding:    var(--espaco-md);
+  animation:  fadeInUp 0.5s ease;
+}
+.form__sucesso-icone { font-size: 3rem; margin-bottom: var(--espaco-sm); }
+.form__sucesso h3    { font-family: var(--fonte-titulo); color: var(--ouro-primario); }
+.form__sucesso p     { color: var(--cinza-texto); margin-top: 8px; }
+
+
+/* ================================================================
+   14. RODAPÉ
+   ================================================================ */
+.rodape {
+  background:  var(--preto-principal);
+  border-top:  2px solid var(--preto-4);
+  padding-top: var(--espaco-lg);
+  position:    relative;
+}
+
+/* Linha dourada no topo do rodapé */
+.rodape::before {
+  content:    '';
+  position:   absolute;
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     2px;
+  background: linear-gradient(90deg, transparent, var(--ouro-primario) 40%, var(--ouro-secundario) 60%, transparent);
+}
+
+.rodape__grid {
+  display:               grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap:                   var(--espaco-md);
+  margin-bottom:         var(--espaco-lg);
+}
+
+.rodape__logo {
+  font-family:   var(--fonte-titulo);
+  font-size:     1.6rem;
+  font-weight:   700;
+  color:         var(--branco);
+  margin-bottom: var(--espaco-sm);
+}
+.rodape__logo span { color: var(--ouro-primario); }
+
+.rodape__descricao {
+  font-size:     0.88rem;
+  color:         var(--cinza-texto);
+  max-width:     300px;
+  line-height:   1.7;
+  margin-bottom: var(--espaco-sm);
+}
+
+.rodape__redes { display: flex; gap: 12px; }
+
+.rodape__rede {
+  width:           36px;
+  height:          36px;
+  border-radius:   50%;
+  border:          1px solid var(--preto-4);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       0.9rem;
+  color:           var(--cinza-texto);
+  transition:      all var(--transicao);
+}
+.rodape__rede:hover {
+  border-color: var(--ouro-primario);
+  color:        var(--ouro-primario);
+  background:   var(--ouro-alpha-10);
+}
+
+.rodape__coluna-titulo {
+  font-size:      0.72rem;
+  font-weight:    700;
+  color:          var(--ouro-primario);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom:  var(--espaco-sm);
+}
+
+.rodape__coluna ul         { display: flex; flex-direction: column; gap: 10px; }
+.rodape__coluna ul li a    { font-size: 0.88rem; color: var(--cinza-texto); transition: color var(--transicao); }
+.rodape__coluna ul li a:hover { color: var(--ouro-secundario); }
+
+.rodape__bottom {
+  border-top:      1px solid var(--preto-4);
+  padding-block:   var(--espaco-sm);
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+  flex-wrap:       wrap;
+  gap:             var(--espaco-sm);
+}
+.rodape__bottom p { font-size: 0.78rem; color: var(--cinza-texto); }
+
+.rodape__topo {
+  width:           40px;
+  height:          40px;
+  background:      linear-gradient(135deg, var(--ouro-primario), var(--ouro-escuro));
+  color:           var(--branco);
+  border-radius:   50%;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  cursor:          pointer;
+  border:          none;
+  font-size:       1rem;
+  transition:      transform var(--transicao), box-shadow var(--transicao);
+}
+.rodape__topo:hover {
+  transform:  translateY(-4px);
+  box-shadow: 0 8px 20px var(--ouro-alpha-40);
+}
+
+
+/* ================================================================
+   15. MEDIA QUERIES — Responsividade
+   ================================================================ */
+@media (max-width: 768px) {
+
+  /* Navbar mobile */
+  .navbar__links {
+    display:        none;
+    position:       absolute;
+    top:            100%;
+    left:           0;
+    right:          0;
+    background:     rgba(28, 28, 28, 0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    padding:        var(--espaco-sm);
+    border-bottom:  1px solid var(--preto-4);
+    gap:            var(--espaco-sm);
+  }
+
+  .navbar__links.aberto { display: flex; }
+  .navbar__toggle       { display: block; }
+
+  /* Hero: desativa parallax no mobile (performance/iOS) */
+  .hero {
+    background-attachment: scroll;
+    min-height:            85vh;
+  }
+
+  /* Carrossel: 1 card por vez */
+  .depoimento-card { min-width: 100%; }
+
+  /* Rodapé: 2 colunas */
+  .rodape__grid { grid-template-columns: 1fr 1fr; }
+
+  /* Formulário: campos empilhados */
+  .form__linha { grid-template-columns: 1fr; }
+
+  /* Badge sem position absolute */
+  .sobre__badge {
+    position:   static;
+    margin-top: var(--espaco-sm);
+    display:    inline-block;
+  }
+}
+
+@media (max-width: 480px) {
+  .rodape__grid { grid-template-columns: 1fr; }
+}
+
+
+/* ================================================================
+   16. INTERSECTION OBSERVER — Animações ao entrar na tela
+   ----------------------------------------------------------------
+   .animar → estado inicial (invisível, deslocado)
+   .animar.visivel → estado final (visível, na posição)
+   
+   JavaScript adiciona .visivel quando o elemento aparece na tela.
+   ================================================================ */
+
+.animar {
+  opacity:    0;
+  transform:  translateY(40px);
+  transition:
+    opacity   0.65s ease,
+    transform 0.65s ease;
+}
+
+.animar.visivel {
+  opacity:   1;
+  transform: translateY(0);
+}
+
+/* Stagger: cada filho anima com delay crescente */
+.animar:nth-child(1) { transition-delay: 0s;    }
+.animar:nth-child(2) { transition-delay: 0.1s;  }
+.animar:nth-child(3) { transition-delay: 0.2s;  }
+.animar:nth-child(4) { transition-delay: 0.3s;  }
+.animar:nth-child(5) { transition-delay: 0.4s;  }
+.animar:nth-child(6) { transition-delay: 0.5s;  }
+
+
+/* ================================================================
+   SCRIPT COMPLEMENTAR — Cole no seu arquivo JS ou <script>
+   ================================================================
+
+   // ── 1. Navbar transparente → sólida ao rolar ──────────────
+   const navbar = document.querySelector('.navbar');
+   window.addEventListener('scroll', () => {
+     navbar.classList.toggle('navbar--scrolled', window.scrollY > 50);
+   });
+
+   // ── 2. Intersection Observer (animações ao entrar na tela) ─
+   const observer = new IntersectionObserver((entries) => {
+     entries.forEach(entry => {
+       if (entry.isIntersecting) {
+         entry.target.classList.add('visivel');
+         observer.unobserve(entry.target);
+       }
+     });
+   }, { threshold: 0.15 });
+
+   document.querySelectorAll('.animar').forEach(el => observer.observe(el));
+
+   // ── 3. Menu hambúrguer (mobile) ───────────────────────────
+   const toggle = document.querySelector('.navbar__toggle');
+   const links  = document.querySelector('.navbar__links');
+   toggle?.addEventListener('click', () => links.classList.toggle('aberto'));
+
+   ================================================================ */
