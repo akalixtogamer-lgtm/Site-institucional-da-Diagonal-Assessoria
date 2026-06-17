@@ -51,14 +51,14 @@
 
   /* ── Pretos  — Estrutura ─────────────────────────── */
   --preto-principal: #1E1E1E;   /* Fundo principal (hero, navbar sólida) */
-  --preto-tom-escuro-1:#1B1B1B;   /* Fundo secundário (seções alternadas) */
-  --preto-tom-escuro-2:#181818;   /* Cards, formulários, wrappers */
-  --preto-tom-escuro-3:#151515;   /* Bordas e separadores */
-  --preto-tom-escuro-4:#121212;   /* Textos secundários, labels, subtítulos */
-  --preto-tom-claro-1:#404040;   /* Textos sobre fundos escuros */
-  --preto-tom-claro-2:#626262;   /* Textos sobre fundos escuros, detalhes */
-  --preto-tom-claro-3:#8F8F8F;   /* Textos sobre fundos escuros, detalhes secundários */
-  --preto-tom-claro-4:#BCBCBC;   /* Textos sobre fundos escuros, detalhes terciários */
+  --preto-tom-escuro-1: #1B1B1B;   /* Fundo secundário (seções alternadas) */
+  --preto-tom-escuro-2: #181818;   /* Cards, formulários, wrappers */
+  --preto-tom-escuro-3: #151515;   /* Bordas e separadores */
+  --preto-tom-escuro-4: #121212;   /* Textos secundários, labels, subtítulos */
+  --preto-tom-claro-1: #404040;   /* Textos sobre fundos escuros */
+  --preto-tom-claro-2: #626262;   /* Textos sobre fundos escuros, detalhes */
+  --preto-tom-claro-3: #8F8F8F;   /* Textos sobre fundos escuros, detalhes secundários */
+  --preto-tom-claro-4: #BCBCBC;   /* Textos sobre fundos escuros, detalhes terciários */
   --preto-tom-claro-5:#DDDDDD;   /* Textos sobre fundos escuros, detalhes quaternários */
 
 /*brancos*/ 
