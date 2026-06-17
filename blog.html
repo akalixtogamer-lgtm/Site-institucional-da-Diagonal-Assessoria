@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blog · Diagonal Contabilidade</title>
+
+<!-- ============================================================
+     FONTES DA MARCA DIAGONAL
+     Playfair Display .... títulos editoriais (display)
+     Montserrat .......... navegação / rótulos / botões
+     Inter ............... corpo de texto
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Folha de estilo do blog -->
+<link rel="stylesheet" href="style_blog.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     SITE PÚBLICO
+============================================================ -->
+<div id="public">
+
+  <!-- ---------- HEADER ---------- -->
+  <header class="header" id="header">
+    <nav class="nav">
+      <a class="brand" href="#">
+        <span class="brand-mark">D</span>
+        <span class="brand-name">Diagonal <span>Contabilidade</span></span>
+      </a>
+      <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+      <div class="menu" id="menu">
+        <a href="#">Serviços</a>
+        <a href="#">Sobre Nós</a>
+        <a href="#" class="active">Blog</a>
+        <a href="#">Feedback</a>
+        <a href="#">Contato</a>
+        <a href="#" class="cta">Fale Conosco</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ---------- HERO ---------- -->
+  <section class="hero">
+    <p class="hero-eyebrow">Conhecimento contábil</p>
+    <h1>Blog<span class="dot">.</span></h1>
+    <div class="hero-line"></div>
+    <p class="crumb"><a href="#">Início</a> &nbsp;/&nbsp; <span>Blog</span></p>
+  </section>
+
+  <!-- ---------- CONTEÚDO ---------- -->
+  <div class="shell">
+    <div class="layout">
+
+      <!-- coluna principal -->
+      <main>
+        <div class="list-head">
+          <h2><small>Últimas publicações</small> Reportagens &amp; Artigos</h2>
+          <span class="count-pill" id="countPill">0 posts</span>
+        </div>
+        <div class="grid" id="grid"><!-- cards injetados via JS --></div>
+      </main>
+
+      <!-- sidebar -->
+      <aside class="aside">
+        <div class="widget">
+          <div class="search">
+            <input type="text" id="searchInput" placeholder="Buscar reportagem..." />
+            <button id="searchBtn" aria-label="Buscar">&#128269;</button>
+          </div>
+        </div>
+
+        <div class="widget">
+          <h3 class="widget-title">Últimos Posts</h3>
+          <ul class="latest" id="latestList"></ul>
+        </div>
+
+        <div class="widget cta-card">
+          <h3 class="widget-title">Vamos conversar?</h3>
+          <p>Para mais informações sobre nossos serviços contábeis, entre em contato com nossa equipe.</p>
+          <a href="#" class="btn-gold">Fale Conosco &nbsp;&rarr;</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ---------- FOOTER ---------- -->
+  <footer class="footer">
+    <div class="brand-name" style="color:var(--cream)">Diagonal <span style="color:var(--gold)">Contabilidade</span></div>
+    <div>Assessoria contábil em Rio de Janeiro · © 2025 Diagonal. Todos os direitos reservados.</div>
+    <a class="admin-link" id="openAdmin" href="#">&#9881; Área administrativa</a>
+  </footer>
+
+</div><!-- /#public -->
+
+
+<!-- ============================================================
+     PAINEL ADMINISTRATIVO
+============================================================ -->
+<div class="admin" id="admin">
+
+  <div class="admin-bar">
+    <div class="a-title"><span class="brand-mark" style="width:34px;height:34px;font-size:1rem">D</span> Diagonal <b>· Painel</b></div>
+    <div class="admin-actions" id="adminTopActions" style="display:none">
+      <button class="btn-ghost" id="viewSite">&#128065; Ver site</button>
+      <button class="btn-ghost" id="logout">Sair</button>
+    </div>
+  </div>
+
+  <!-- tela de login -->
+  <div class="login-wrap active" id="loginWrap">
+    <div class="login-card">
+      <div class="lock">&#128274;</div>
+      <h2>Acesso restrito</h2>
+      <p>Informe a senha para gerenciar as reportagens do blog.</p>
+      <input type="password" id="pwInput" placeholder="••••••••" />
+      <div class="login-err" id="loginErr"></div>
+      <button class="btn-primary" id="loginBtn" style="width:100%">Entrar</button>
+      <p class="hint" style="margin-top:16px">Senha padrão de demonstração: <b>diagonal2025</b></p>
+    </div>
+  </div>
+
+  <!-- dashboard -->
+  <div class="admin-shell" id="dashboard" style="display:none">
+
+    <div class="adm-stats">
+      <div class="stat"><div class="n" id="statTotal">0</div><div class="l">Reportagens</div></div>
+      <div class="stat"><div class="n" id="statCats">0</div><div class="l">Categorias</div></div>
+      <div class="stat"><div class="n" id="statLast">—</div><div class="l">Última publicação</div></div>
+    </div>
+
+    <div class="admin-grid">
+
+      <!-- formulário -->
+      <div class="panel">
+        <div class="panel-head">
+          <h3 id="formTitle">Nova reportagem</h3>
+          <button class="btn-secondary" id="newBtn" style="display:none">+ Nova</button>
+        </div>
+        <div class="panel-body">
+          <input type="hidden" id="editId" />
+          <div class="field">
+            <label>Título</label>
+            <input type="text" id="fTitulo" placeholder="Ex.: MEI: o que muda em 2025" />
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label>Categoria</label>
+              <input type="text" id="fCategoria" list="catList" placeholder="Ex.: Tributário" />
+              <datalist id="catList"></datalist>
+            </div>
+            <div class="field">
+              <label>Data</label>
+              <input type="date" id="fData" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Resumo (aparece no card)</label>
+            <textarea id="fResumo" style="min-height:70px" placeholder="Uma ou duas frases que resumem a reportagem."></textarea>
+          </div>
+          <div class="field">
+            <label>Conteúdo completo</label>
+            <textarea id="fConteudo" placeholder="Texto completo da reportagem. Separe os parágrafos com uma linha em branco."></textarea>
+          </div>
+          <div class="field">
+            <label>Imagem de capa</label>
+            <input type="text" id="fImagem" placeholder="Cole uma URL de imagem..." />
+            <p class="hint">ou envie um arquivo:</p>
+            <input type="file" id="fFile" accept="image/*" style="margin-top:6px;background:transparent;border:none;padding:0" />
+            <div class="img-preview" id="imgPreview">Pré-visualização da capa</div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-primary" id="saveBtn">Publicar reportagem</button>
+            <button class="btn-secondary" id="cancelBtn" style="display:none">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- lista -->
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Reportagens publicadas</h3>
+          <span class="count-pill" id="admCount">0</span>
+        </div>
+        <div class="panel-body">
+          <div class="adm-list" id="admList"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- /#admin -->
+
+<!-- modal de leitura -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<!-- toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Lógica da aplicação -->
+<script src="script_blog.js"></script>
+</body>
+</html>

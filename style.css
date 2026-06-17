@@ -15,12 +15,14 @@
    8.  Serviços (cards em grid)
    9.  Sobre Nós
    10. Missão, Visão e Valores
-   11. Depoimentos (carrossel)
-   12. Localização e Contato
-   13. Formulário de Contato
-   14. Rodapé
-   15. Media Queries
-   16. Intersection Observer (animações ao entrar na tela)
+   11. Blog (destaques, layout, categorias)
+   12. Faq
+   13. Depoimentos (carrossel)
+   14. Localização e Contato
+   15. Formulário de Contato
+   16. Rodapé
+   17. Media Queries
+   18. Intersection Observer (animações ao entrar na tela)
    ================================================================ */
 
 
@@ -164,7 +166,7 @@
   --creme-principal: #F7F2EA;   /* Fundo de seções de destaque (sobre, MVV) */
   --creme-claro:     #FFFCC0;   /* Badge, tags, destaques em fundos claros */
   --creme-medio:     #E8DFC8;   /* Bordas e detalhes em modo claro */
-
+  
   /* ── Técnico — Serviços e Dados ──────────────────────────── */
   --tecnico-azul:    #E1E9F8;   /* Fundo de seções técnicas/serviços */
 
@@ -225,7 +227,7 @@
   
  --ouro-velho-principal: #8C7332;   /*Texto das tags em (#8C7332) sobre o fundo claro - contraste correto dentro da família*/
  --branco-principal: #EEEEEE; /*Badges neutros (#EEEEEE) para categorias sem destaque especial (“Tributário”,”Fiscal”)*/
- 
+ --grafite: #111827;
 
 
   /* ── Tipografia ───────────────────────────────────────────── */
@@ -253,6 +255,14 @@
 
   /* ── Altura da Navbar (usada para compensar position:fixed) ── */
   --altura-navbar: 72px;
+
+  /* ============================================================
+     AJUSTE DE CENTRALIZAÇÃO GLOBAL
+     ------------------------------------------------------------
+     Somente para enquadrar toda a página no centro da tela
+     sem alterar a estrutura original do projeto.
+     ============================================================ */
+  --maxw: 1400px;
 }
 
 
@@ -293,15 +303,30 @@ img {
   display:   block;
 }
 
+/* ============================================================
+   AJUSTE DE CENTRALIZAÇÃO GLOBAL
+   ------------------------------------------------------------
+   Garante que as áreas principais ocupem 100% da largura
+   e fiquem enquadradas ao centro da viewport.
+   ============================================================ */
+header,
+main,
+footer,
+section,
+.page {
+  width: 100%;
+}
+
 
 /* ================================================================
    3. UTILITÁRIOS
    ================================================================ */
 
 .container {
-  max-width:      1200px;
-  margin-inline:  auto;
-  padding-inline: var(--espaco-sm);
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--espaco-md);
 }
 
 /* Divisor dourado decorativo */
@@ -480,8 +505,8 @@ img {
 
   /* ESTADO INICIAL: totalmente transparente */
   background-color: transparent;
-  backdrop-filter:  none;
   -webkit-backdrop-filter: none;
+  backdrop-filter:  none;
   border-bottom:    1px solid transparent;
 
   /* Transição suave entre transparente e sólido */
@@ -497,8 +522,8 @@ img {
 */
 .navbar--scrolled {
   background-color: var(--preto-principal);
-  backdrop-filter:  blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter:  blur(12px);
   border-bottom-color: var(--preto-4);
 }
 
@@ -580,7 +605,7 @@ img {
   transition:       width var(--transicao);
 }
 
-.navbar__links a:hover          { color: var(--preto-principal); }
+.navbar__links a:hover          { color: var(--ouro-vibrante-principal); }
 .navbar__links .btn-nav:hover          { color: var(--branco-principal); }
 .navbar__links a:hover::after   { width: 100%; }
 
@@ -623,7 +648,7 @@ img {
   position:       relative;
   min-height:     100vh;
   display:        flex;
-  align-items:    center;
+  align-items:    flex-start;
   overflow:       hidden;
 
   /* Compensa a navbar fixed: conteúdo começa abaixo dela */
@@ -681,7 +706,7 @@ img {
 /* Tag de identificação (acima do título) */
 .hero__tag {
   display:        inline-flex;
-  align-items:    center;
+  align-items:    flex-start;
   gap:            10px;
   font-size:      0.72rem;
   font-weight:    700;
@@ -739,7 +764,7 @@ img {
   display:     flex;
   gap:         var(--espaco-sm);
   flex-wrap:   wrap;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* CTA principal com pulso dourado */
@@ -838,8 +863,8 @@ img {
 }
 
 .card-servico__icone {
-  width:           52px;
-  height:          52px;
+  width:           264px;
+  height:          312px;
   background:      var(--ouro-primario);
   border:          1px solid var(--ouro-escuro-4);
   border-radius:   var(--raio-md);
@@ -886,7 +911,7 @@ img {
 
 
 /* ================================================================
-   9. SEÇÃO SOBRE NÓS
+   9. SEÇÃO NOSSOS SERVIÇOS
    ----------------------------------------------------------------
    Usa fundo creme/bege como "respiro" — diferencia visualmente
    das seções escuras. Transmite tradição e confiança.
@@ -894,7 +919,7 @@ img {
    ================================================================ */
 .sobre {
   padding-block:    var(--espaco-xl);
-  background-color: var(--tecnico-azul);  /* ← BEGE/CREME — respiro */
+  background-color: var(--azul-claro-2);  /* ← BEGE/CREME — respiro */
   color:            var(--preto-principal);
   position:         relative;
   overflow:         hidden;
@@ -908,7 +933,7 @@ img {
   right:          -80px;
   width:          300px;
   height:         300px;
-  border:         1px solid var(--ouro-primario);
+  /* border:         1px solid var(--); */
   border-radius:  50%;
   pointer-events: none;
 }
@@ -929,7 +954,7 @@ img {
   position:      relative;
   border-radius: var(--raio-lg);
   overflow:      hidden;
-  box-shadow:    0 32px 64px var(--ouro-velho-claro);
+  box-shadow:    0 32px 64px var(--preto-principal);
 }
 
 .sobre__imagem-wrapper img {
@@ -947,7 +972,7 @@ img {
   position:      absolute;
   bottom:        -20px;
   right:         -20px;
-  background:    linear-gradient(135deg, var(--ouro-velho-principal), var(--cinza-principal));
+  background:    linear-gradient(135deg, var(--preto-tom-claro-2), var(--cinza-principal));
   color:         var(--branco);
   padding:       var(--espaco-sm) var(--espaco-md);
   border-radius: var(--raio-md);
@@ -993,8 +1018,8 @@ img {
   width:           30px;
   height:          30px;
   min-width:       30px;
-  background:      var(--amarelo-escuro-4);
-  border:          1px solid var(--amarelo-escuro-4);
+  background:      var(--preto-principal); /*backgroud do icone*/
+  border:          1px solid var(--preto-principal); /*borda do icone*/
   border-radius:   50%;
   display:         flex;
   align-items:     center;
@@ -1004,7 +1029,7 @@ img {
 }
 
 .sobre__item strong { color: var(--preto-principal); font-size: 0.95rem; display: block; }
-.sobre__item p      { font-size: 0.88rem; color: var(--branco-principal); margin-top: 2px; }
+.sobre__item p      { font-size: 0.88rem; color: var(--preto-tom-claro-1); margin-top: 2px; }
 
 
 /* ================================================================
@@ -1050,14 +1075,14 @@ img {
 }
 .mvv__card:hover {
   background:  var(--preto-4);
-  box-shadow:  0 12px 32px var(--ouro-velho-claro);
+  box-shadow:  0 12px 32px var(--azul-escuro-2);
 }
 
 .mvv__card-letra {
   font-family:   var(--fonte-titulo);
   font-size:     3.8rem;
   font-weight:   700;
-  color:         var(--ouro-primario);
+  color:         var(--preto-principal);
   line-height:   1;
   margin-bottom: var(--espaco-xs);
 }
@@ -1069,15 +1094,358 @@ img {
   margin-bottom: var(--espaco-xs);
 }
 
-.mvv__card p { font-size: 0.88rem; color: var(--branco-principal); line-height: 1.65; }
+.mvv__card p { font-size: 0.88rem; color: var(--branco-claro-4); line-height: 1.65; }
 
+.blog {
+  padding-block:    var(--espaco-xl);
+  background-color: var(--preto-2);
+  /* Padrão geométrico sutil como textura de fundo */
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40L40 0' stroke='%23ffffff06' fill='none'/%3E%3C/svg%3E");
+  position: relative;
+}
 
+/* ================================================================
+   11. BLOG — CARDS DE CONTEÚDO
+     Fundo escuro com padrão geométrico sutil — mantém a identidade
+     visual, mas diferencia do hero e das seções claras.
+   ================================================================ */
+/* Borda superior em gradiente dourado */
+.blog::before {
+  content:    '';
+  position:   absolute;
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     2px;
+  background: linear-gradient(90deg, transparent, var(--ouro-primario), transparent);
+}
+
+.blog__cabecalho {
+  text-align:    center;
+  margin-bottom: var(--espaco-lg);
+}
+
+.blog__grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap:                   var(--espaco-sm);
+}
+
+.blog__card {
+  background:     var(--azul-claro-2);
+  border:         1px solid var(--preto-4);
+  border-radius:  var(--raio-lg);
+  padding:        var(--espaco-md);
+  transition:
+    transform    var(--transicao),
+    border-color var(--transicao),
+    box-shadow   var(--transicao);
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--espaco-sm);
+  cursor:         default;
+}
+
+.blog__card:hover {
+  transform:    translateY(-7px);
+  border-color: var(--preto-2);
+  box-shadow:   var(--ouro-velho-claro) 0px 12px 24px;
+}
+
+.blog__card__icone {
+  width:           264px;
+  height:          16px;
+  background:      var(--ouro-primario);
+  border:          1px solid var(--ouro-escuro-4);
+  border-radius:   var(--raio-md);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       1.5rem;
+  transition:      background var(--transicao);
+}
+
+.blog__card:hover .blog__card__icone {
+  background: var(--preto-2);
+}
+
+.blog__card__titulo {
+  font-family: var(--fonte-titulo-principal);
+  font-size:   1.15rem;
+  font-weight: 700;
+  color:       var(--preto-principal);
+}
+
+.blog__card__texto {
+  font-size:   0.88rem;
+  color:       var(--cinza-principal);
+  line-height: 1.65;
+  flex-grow:   1;
+}
+
+.blog__card__link {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            6px;
+  font-size:      0.78rem;
+  font-weight:    700;
+  color:          var(--preto-principal);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:     gap var(--transicao), color var(--transicao);
+}
+.blog__card__link:hover {
+  gap:   11px;
+  color: var(--ouro-vibrante-escuro);
+}
+
+.botao-centralizado {
+  display:        flex;
+  justify-content: center;
+  margin-top:     var(--espaco-md);
+}
+
+.blog_botao{
+  display:          inline-flex;
+  align-items:      center;
+  gap:              8px;
+  padding:          13px 30px;
+  background:       linear-gradient var(--ouro-velho-principal);
+  color:            var(--preto-principal);
+  font-family:      var(--titulo-principal);
+  font-weight:      700;
+  font-size:        0.875rem;
+  letter-spacing:   0.06em;
+  text-transform:   uppercase;
+  border:           none;
+  border-radius:    var(--raio-sm);
+  cursor:           pointer;
+  transition:       background var(--transicao),
+                    transform  var(--transicao),
+}
+
+.blog__card.animar{
+  animation: fadeIn 0.8s ease both;
+  font-size: large;
+  color: var(--preto-principal);
+}
+
+.page{
+  background:var(--preto-principal);
+  padding:0 0 70px;          /* o padding-bottom revela a faixa escura embaixo */
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  width: 100%;
+}
+
+/* 2) PAINEL CLARO — é ele que recebe os cantos arredondados.
+      O border-radius com um valor GRANDE no canto inferior-direito
+      é o que gera aquela varredura curva da imagem. Como o painel
+      fica sobre o fundo escuro (.page), o "recorte" da curva mostra
+      a cor --ink por baixo. */
+.bloco{
+  width:100%;
+  max-width:1440px;
+  margin-inline: auto;
+  background:var(--azul-claro-2);
+  /* leve degradê para dar profundidade ao painel claro */
+  background-image:linear-gradient(180deg, var(--azul-claro-2) 0%, var(--azul-claro-2) 60%, var(--azul-claro-2) 100%);
+  padding:64px 24px 110px;
+
+  /* ====== A BORDA CURVA ======
+     border-radius: superior-esq | superior-dir | inferior-dir | inferior-esq
+     - cantos de cima: pequenos (8px)
+     - canto inferior-DIREITO: 140px  → a grande curva da imagem
+     - canto inferior-esquerdo: 40px  → curva suave do outro lado */
+  border-radius:8px 8px 140px 40px;
+
+  /* sombra ajuda o painel a "descolar" do fundo escuro */
+  box-shadow:0 30px 60px var(--preto-principal);
+}
+
+/* ============================================================
+   AJUSTE DE CENTRALIZAÇÃO GLOBAL
+   ------------------------------------------------------------
+   Esta regra existia sobrescrevendo a primeira .container.
+   Agora ela mantém o mesmo enquadramento central em todo o site.
+   ============================================================ */
+.container{
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--espaco-md);
+}
+
+/* ============================================================
+   AJUSTE DE CENTRALIZAÇÃO GLOBAL
+   ------------------------------------------------------------
+   Centraliza cabeçalhos de seções e conteúdos que precisavam
+   ficar visualmente enquadrados no meio da tela.
+   ============================================================ */
+.servicos__cabecalho,
+.blog__cabecalho,
+.mvv__cabecalho,
+.localizacao__cabecalho,
+.depoimentos__cabecalho {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+/* ============================================================
+   1. PERGUNTAS FREQUENTES (ACCORDION)
+============================================================ */
+.titulo-secao{
+  font-family:var(--titulo-principal);
+  font-size:clamp(1.6rem,4vw,2.1rem);
+  font-weight:700;
+  color:var(--ouro-primario);
+  text-align:center;
+  margin-bottom:38px;
+}
+
+.faq{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width: 100%;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+.faq-item{
+  background:var(--ouro-escuro-4);
+  border:1px solid var(--ouro-primario);
+  border-radius:8px;
+  overflow:underline;                 /* mantém a resposta dentro do raio */
+  transition:border-color .25s, box-shadow .25s;
+}
+.faq-item.open{
+  border-color:var(--ouro-primario);
+  box-shadow:0 8px 24px var(--preto-principal);  /* destaque de informação */
+}
+
+/* Cabeçalho clicável da pergunta */
+.faq-pergunta{
+  width:100%;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:16px 20px;
+  text-align:left;
+  font-family:var(--titulo-principal);
+  font-size:.86rem;
+  color:var(--preto-tom-claro-1);
+  transition:color .2s;
+}
+.faq-item.open .faq-pergunta{ color:var(--ouro-primario); font-weight:600; }
+
+/* Seta ↓ que gira 180° quando aberto */
+.faq-seta{
+  flex-shrink:0;
+  color:var(--ouro-primario);
+  font-size:1rem;
+  transition:transform .3s ease;
+}
+.faq-item.open .faq-seta{ transform:rotate(180deg); }
+
+/* Painel da resposta — animado via max-height (0 → valor) */
+.faq-resposta{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+}
+.faq-item.open .faq-resposta{ max-height:220px; }
+.faq-resposta p{
+  padding:0 20px 18px;
+  font-size:.9rem;
+  line-height:1.7;
+  color:var(--preto-principal);
+}
+
+/* ============================================================
+   2. DEPOIMENTOS / GOOGLE
+============================================================ */
+.depoimentos{ text-align:center; margin-top:80px; }
+
+.eyebrow{
+  font-family:var(--fonte-subtitulo);
+  font-size:.66rem; font-weight:600;
+  letter-spacing:.3em; text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:12px;
+}
+.titulo-depo{
+  font-family:var(--titulo-principal);
+  font-size:clamp(1.7rem,4.5vw,2.3rem);
+  font-weight:700; line-height:1.25;
+  color:var(--text);
+}
+.titulo-depo .dourado{ color:var(--ouro-primario); }
+
+.subtitulo{
+  font-family:var(--fonte-subtitulo);
+  font-size:.78rem; color:var(--text-soft);
+  margin:16px 0 26px; line-height:1.7;
+}
+
+/* Selo do Google */
+.google-badge{
+  display:inline-flex; align-items:center; gap:14px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px 22px;
+  box-shadow:0 6px 20px var(--preto-principal);
+  margin-inline: auto;
+}
+.g-info{ text-align:left; }
+.g-linha{ display:flex; align-items:center; gap:8px; }
+.g-nota{ font-family:var(--fonte-subtitulo); font-weight:700; font-size:1rem; color:var(--text); }
+.g-estrelas{ color:var(--amarelo-principal); letter-spacing:1px; font-size:.95rem; }
+.g-qtd{ font-family:var(--fonte-subtitulo); font-size:.8rem; color:var(--text-soft); }
+.g-categoria{
+  font-family:var(--fonte-subtitulo); font-size:.74rem; color:var(--text-soft);
+  margin-top:3px; display:flex; align-items:center; gap:6px;
+}
+.g-pin{
+  display:inline-grid; place-items:center;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--ouro-primario); color:var(--preto-principal);
+  font-size:.6rem; font-weight:700;
+}
+
+.container-depoimentos{
+  margin-top:40px;
+  display:flex; align-items:center; gap:24px;
+  justify-content:center;
+}
+.depoimento{
+  background:var(--azul-claro-2);
+  border:1px solid var(--azul-claro-1);
+  border-radius:12px;
+  padding:20px;
+  max-width:320px;
+  transition:transform .25s, border-color .25s, box-shadow .25s;
+}
+.depoimento:hover{
+  transform:translateY(-6px);
+  border-color:var(--ouro-primario);
+  box-shadow:0 12px 24px var(--preto-principal);
+}
+.depoimento .aspas{
+  font-size:2.8rem;
+  color:var(--ouro-primario); 
+  font-family:var(--titulo-principal);
+  line-height:0.5;  
+  margin-bottom:12px;
+  opacity:0.7;
+}
 /* ================================================================
    11. DEPOIMENTOS — Carrossel
    ================================================================ */
 .depoimentos {
   padding-block: var(--espaco-xl);
-  background:    var(--bege-escuro-4); /* Fundo bege escuro para diferenciar da seção clara e criar contraste com os cards dourados */
+  background:    var(--azul-claro-2); /* Fundo bege escuro para diferenciar da seção clara e criar contraste com os cards dourados */
   overflow:      hidden;
   position:      relative;
 }
@@ -1097,7 +1465,12 @@ img {
   margin-bottom: var(--espaco-lg);
 }
 
-.depoimentos__track-wrapper { overflow: hidden; }
+.depoimentos__track-wrapper {
+  overflow: hidden;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
 
 .depoimentos__track {
   display:    flex;
@@ -1106,9 +1479,11 @@ img {
 }
 
 .depoimento-card {
-  min-width:     calc(50% - 8px);
-  background:    var(--preto-3);
-  border:        1px solid var(--preto-4);
+  /* min-width:     calc(50% - 8px); */
+  width:         50%;
+  height:        100%;
+  background:    var(--preto-tom-claro-1); /* Fundo escuro para destacar o conteúdo dourado */
+  border:        1px solid var(--ouro-escuro-4);
   border-radius: var(--raio-lg);
   padding:       var(--espaco-md);
   flex-shrink:   0;
@@ -1118,7 +1493,7 @@ img {
 
 .depoimento-card__aspas {
   font-size:     3.2rem;
-  color:         var(--ouro-primario);
+  color:         var(--branco-claro-4);
   font-family:   var(--fonte-titulo);
   line-height:   0.5;
   margin-bottom: var(--espaco-sm);
@@ -1127,7 +1502,7 @@ img {
 
 .depoimento-card__texto {
   font-size:     0.92rem;
-  color:         var(--branco-principal);
+  color:         var(--azul-principal);
   font-style:    italic;
   line-height:   1.75;
   margin-bottom: var(--espaco-md);
@@ -1141,11 +1516,11 @@ img {
 
 /* Avatar com inicial — cor dourado escuro */
 .depoimento-card__avatar {
-  width:           20px;
-  height:          20px;
+  width:           52px;
+  height:          52px;
   border-radius:   50%;
-  background:      linear-gradient(135deg, var(--ouro-primario), var(--ouro-escuro));
-  color:           var(--branco-principal);
+  background:      linear-gradient(135deg, var(--OURO-PRIMARIO), var(--ouro-primario-escuro));
+  color:           var(--azul-claro-2);
   display:         flex;
   align-items:     center;
   justify-content: center;
@@ -1154,7 +1529,7 @@ img {
 }
 
 .depoimento-card__estrelas {
-  color:         var(--branco-principal);
+  color:         var(--ouro-primario);
   font-size:     0.85rem;
   margin-bottom: 2px;
 }
@@ -1171,8 +1546,8 @@ img {
 .depoimentos__btn {
   width:           20px;
   height:          20px;
-  border-radius:   50%;
-  border:          1px solid var(--branco-claro-3);
+  border-radius:   1%;
+  border:          1px solid var(--ouro-escuro-4);
   background:      transparent;
   color:           var(--ouro-primario);
   font-size:       1rem;
@@ -1183,8 +1558,8 @@ img {
   justify-content: center;
 }
 .depoimentos__btn:hover {
-  background: var(--preto-4);
-  color:      var(--preto-principal);
+  background: var(--azul-escuro-2);
+  color:      var(--ouro-primario-escuro);
 }
 
 .depoimentos__dots { display: flex; gap: 8px; }
@@ -1193,14 +1568,14 @@ img {
   width:         8px;
   height:        8px;
   border-radius: 50%;
-  background:    var(--branco-claro-3);
+  background:    var(--preto-principal);
   border:        none;
   cursor:        pointer;
   transition:    all var(--transicao);
 }
 
 .depoimentos__dot.ativo {
-  background:    var(--ouro-primario);
+  background:    var(--preto-principal);
   width:         24px;
   border-radius: var(--raio-sm);
 }
@@ -1224,6 +1599,9 @@ img {
   gap:         var(--espaco-md);
   flex-wrap:   wrap;
   align-items: stretch;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
 }
 
 .localizacao__infos {
@@ -1298,6 +1676,9 @@ img {
   display:   flex;
   gap:       var(--espaco-lg);
   flex-wrap: wrap;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
 }
 
 .contato__texto { flex: 1 1 320px; }
@@ -1528,7 +1909,7 @@ img {
     left:           0;
     right:          0;
     background:     rgba(28, 28, 28, 0.98);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px); 
     flex-direction: column;
     padding:        var(--espaco-sm);
     border-bottom:  1px solid var(--preto-4);
@@ -1625,3 +2006,83 @@ img {
    toggle?.addEventListener('click', () => links.classList.toggle('aberto'));
 
    ================================================================ */
+
+/* ================================================================
+   17. BOTÃO FLUTUANTE DO WHATSAPP
+   ----------------------------------------------------------------
+   É apenas um link <a>. O position:fixed o "descola" do fluxo
+   normal da página e o prende em relação à JANELA — por isso ele
+   continua visível mesmo quando o usuário rola o site inteiro.
+   Não depende de JavaScript: o clique no link já abre o WhatsApp.
+   ================================================================ */
+.whatsapp-flutuante {
+  position: fixed;            /* fixo em relação à janela, não à página */
+  right: 1.5rem;             /* distância da borda direita */
+  bottom: 1.5rem;            /* distância da borda inferior */
+  z-index: 1001;             /* 1 a mais que a navbar (1000) → fica acima de tudo */
+
+  display: flex;             /* usado para centralizar o ícone no círculo */
+  align-items: center;       /* centraliza na vertical */
+  justify-content: center;   /* centraliza na horizontal */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;        /* 50% em um quadrado = círculo perfeito */
+
+  background-color: #25d366; /* verde oficial do WhatsApp */
+  color: #fff;               /* o ícone usa currentColor → herda este branco */
+  text-decoration: none;     /* remove o sublinhado padrão de link */
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: whatsapp-pulso 2.4s infinite; /* pulso suave para chamar atenção */
+}
+
+/* Ao passar o mouse: cresce um pouco e o pulso para */
+.whatsapp-flutuante:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  animation: none;
+}
+
+/* Acessibilidade: contorno dourado da marca ao navegar pelo teclado (Tab) */
+.whatsapp-flutuante:focus-visible {
+  outline: 3px solid var(--ouro-vibrante-principal);
+  outline-offset: 3px;
+}
+
+/* O ícone SVG dentro do botão */
+.whatsapp-flutuante svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* O "anel" que pulsa para fora, dando sensação de vida ao botão */
+@keyframes whatsapp-pulso {
+  0%   { box-shadow: 0 4px 16px rgba(0,0,0,.25), 0 0 0 0   rgba(37,211,102,.5); }
+  70%  { box-shadow: 0 4px 16px rgba(0,0,0,.25), 0 0 0 14px rgba(37,211,102,0); }
+  100% { box-shadow: 0 4px 16px rgba(0,0,0,.25), 0 0 0 0   rgba(37,211,102,0); }
+}
+
+/* Em telas pequenas, encolhe um pouco e cola mais nas bordas */
+@media (max-width: 600px) {
+  .whatsapp-flutuante { width: 54px; height: 54px; right: 1rem; bottom: 1rem; }
+  .whatsapp-flutuante svg { width: 28px; height: 28px; }
+}
+
+/* Respeita quem desativou animações no sistema operacional (acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-flutuante { animation: none; }
+}
+
+/* ============================================================
+   RESPONSIVO — em telas pequenas a curva grande fica desproporcional,
+   então reduzimos o raio do canto inferior-direito.
+============================================================ */
+@media (max-width:560px){
+  .bloco{
+    padding:48px 18px 80px;
+    border-radius:8px 8px 70px 24px;   /* curva menor no mobile */
+  }
+  .depoimentos{ margin-top:60px; }
+  .google-badge{ padding:12px 16px; gap:10px; }
+}

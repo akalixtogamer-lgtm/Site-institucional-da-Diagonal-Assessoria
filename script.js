@@ -97,6 +97,42 @@ document.addEventListener('click', function (evento) {
   }
 });
 
+/* ============================================================
+   ACCORDION DAS PERGUNTAS FREQUENTES
+   - Ao clicar numa pergunta, ela abre/fecha (alterna a classe "open").
+   - Comportamento "exclusivo": abrir uma fecha as demais.
+     Para permitir várias abertas ao mesmo tempo, basta remover
+     o trecho indicado abaixo.
+============================================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Seleciona todos os cabeçalhos clicáveis das perguntas
+  const perguntas = document.querySelectorAll(".faq-pergunta");
+
+  perguntas.forEach(botao => {
+    botao.addEventListener("click", () => {
+      // .faq-item é o elemento pai que recebe a classe "open"
+      const item = botao.closest(".faq-item");
+      const jaAberto = item.classList.contains("open");
+
+      /* ---- modo exclusivo: fecha todos antes de abrir ----
+         (remova este bloco se quiser permitir vários abertos) */
+      document.querySelectorAll(".faq-item.open").forEach(aberto => {
+        aberto.classList.remove("open");
+        aberto.querySelector(".faq-pergunta").setAttribute("aria-expanded", "false");
+      });
+      /* ----------------------------------------------------- */
+
+      // Se o item clicado não estava aberto, abre agora
+      if (!jaAberto) {
+        item.classList.add("open");
+        botao.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+});
+
+
 
 /* ================================================================
    MÓDULO 2 — CARROSSEL DE DEPOIMENTOS
